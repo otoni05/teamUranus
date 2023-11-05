@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ログイン</title>
+	<!-- リセットCSSを読み込む処理を記述 -->
+	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+	<!-- cssファイルを読み込む処理を記述 -->
+	<link rel="stylesheet" href="/login.css">
+
+</head>
+
+<body>
+	<header>
+		<img src="picture/DLlogo.png" class="logo">
+		<h2 class="tytle">JavaTeamDevelopment</h2>
+	</header>
+	<!-- ログインフォーム -->
+
+		<div class="container">
+			<div class="top">
+				<h2>ログイン</h2>
+				<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+			</div>
+			
+			<form th:action="@{/login}" method="post" th:object="${loginForm}">
+				<div class="twoColumn">
+					<label for="loginId">UserID</label>
+					<input type="text" th:field="*{loginId}" class="formControl">
+				</div>
+				<br>
+				<div class="twoColumn">
+					<label for="password">PassWord</label>
+					<input type="password" th:field="*{password}" class="formControl">
+				</div>
+				<input type="submit" value="登録" id="loginBtn">
+				<a th:href="@{/newUser}">新規会員登録はこちら</a>
+			</form>
+		
+		</div>
+		
+
+</html>
