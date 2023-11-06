@@ -53,7 +53,6 @@ public class UserController {
         return "newUser";
     }
     
-    
     @PostMapping("/newUser")
     public String register(Model model, @Valid @ModelAttribute("newUser") User newUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
