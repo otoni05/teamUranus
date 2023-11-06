@@ -23,11 +23,11 @@
 		<div class="container">
 			<div class="top">
 				<h2>ログイン</h2>
-				<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				<span th:if="${#fields.hasErrors('*{loginForm.loginId}')}" th:errors="*{loginForm.loginId}"></span>
+				<span th:if="${#fields.hasErrors('*{loginForm.password}')}" th:errors="*{loginForm.password}"></span>
 			</div>
 			
-			<form th:action="@{/login}" method="post" th:object="${loginForm}">
+			<form th:action="@{/login}" th:method="post" th:object="${loginForm}">
 				<div class="twoColumn">
 					<label for="loginId">UserID</label>
 					<input type="text" th:field="*{loginId}" class="formControl">
@@ -40,8 +40,6 @@
 				<input type="submit" value="登録" id="loginBtn">
 				<a th:href="@{/newUser}">新規会員登録はこちら</a>
 			</form>
-		
+			
 		</div>
-		
-
 </html>
