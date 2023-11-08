@@ -9,13 +9,13 @@
 	<!-- リセットCSSを読み込む処理を記述 -->
 	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
 	<!-- cssファイルを読み込む処理を記述 -->
-	<link rel="stylesheet" href="/topMenu.css">
+	<link rel="stylesheet" href="/css/topMenu.css">
 
 </head>
 
 <body>
 	<header>
-		<img src="picture/DLlogo.png" class="logo">
+		<img th:src="@{/img/DLlogo.png}" class="logo">
 		<h2 class="tytle">JavaTeamDevelopment</h2>
 	</header>
 
@@ -24,10 +24,10 @@
 			<form method="post">
 				<div class="parContainer">
 					<div class="index">
-						<h2>事故紹介登録</h2>
+						<h2>自己紹介登録</h2>
 					</div>
 					<div class="btn">
-						<input type="submit" value="登録に進む" id="regBtn" formaction="#">
+						<input type="submit" value="登録に進む" id="regBtn" formaction="@{#}">
 					</div>
 					</div>
 			

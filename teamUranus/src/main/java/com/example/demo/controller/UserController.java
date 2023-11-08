@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +28,8 @@ public class UserController {
 	    model.addAttribute("loginForm", new LoginForm());
 	    return "login";
 	}
-
+	
+	
 	@PostMapping("/login")
 	public String processLoginForm(@Valid @ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult) {
 	    if (bindingResult.hasErrors()) {
@@ -37,16 +39,19 @@ public class UserController {
 	    // ログイン処理
 	    User existingUser = userService.findByUserId(loginForm.getLoginId());
 
-	    if (existingUser != null && existingUser.getPassword().equals(loginForm.getPassword())) {
-	        // ログイン成功
-	        return "redirect:/topMenu";
-	    } else {
-	        // ログイン失敗
-	        bindingResult.rejectValue("userId", "error.user", "ログイン情報が正しくありません");
-	        return "login";
+	    if (existingUser != null) {
+	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	        if (passwordEncoder.matches(loginForm.getPassword(), existingUser.getPassword())) {
+	            // ログイン成功
+	            return "redirect:/topMenu"; // ログイン成功時には/topMenuにリダイレクト
+	        }
 	    }
-	}
 
+	    // ログイン失敗
+	    bindingResult.rejectValue("loginId", "error.user", "ログイン情報が正しくありません");
+	    return "login";
+	}
+	
     @GetMapping("/newUser")
     public String view(Model model) {
         model.addAttribute("newUser", new User());
@@ -72,3 +77,5 @@ public class UserController {
         return "topMenu";
     }
 }
+
+
