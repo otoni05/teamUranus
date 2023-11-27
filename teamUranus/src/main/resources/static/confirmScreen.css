@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+
+/* ==================common================== */
+body{
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+}
+a{
+    text-decoration: none;
+}
+li{
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+h2{
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+span{
+    text-align: left;
+}
+p{
+    overflow-wrap: break-word;
+}
+
+/* ==================header==================== */
+
+header{
+    padding: 5px 4% 20px;
+    background-color: gray;
+    justify-content:space-between;
+}
+header a{
+    color: white;
+}
+header h1{
+    color: white;
+}
+.headerMenu{
+    display: flex;
+    justify-content: space-between;
+}
+.headerMenu li{
+    margin-left: 24px;
+    color: black;
+    font-size: 25px;
+    font-weight:bold;
+}
+footer{
+	margin: 0;
+	padding: 0;
+	
+}
+body{
+    background-color: #f5f5f5;
+	
+}
+main{
+    margin: 0 auto;
+	text-align: center;
+}
+main h1{
+	text-align: center;
+}
+#formtitle {
+	padding: 70px 0 20px 0;
+	margin: 0;
+    font-size: 20px;
+	font-weight:lighter;
+}
+.formbox {
+	display: inline-block;
+	text-align: left;
+	width: 700px;
+}
+form span{
+	margin-right: 20px;
+}
+.name{
+    text-align: right;
+}
+.formbox span{
+	width: 5em;
+	margin:0 10px 0 0;
+	display:inline-block;
+	vertical-align:top;
+	text-align: center;
+}
+.formbox ul li:nth-of-type(1){
+	padding: 10px 0 30px 0;
+}
+.formbox ul li:nth-of-type(2){
+	padding: 0 0 25px 0;
+}
+.formbox li{
+	padding-bottom: 10px;
+	
+}
+.formbox ul li:nth-of-type(4){
+	padding: 20px 0 30px 0;
+}
+.button{
+	margin: 0 20px 20px 40px;
+	padding: 20px 60px 20px 60px;
+	background-color: lightblue;
+	border: lightblue;
+	font-weight:bold;
+}
+input.name{
+	width: 70%;
+}
+.hitokoto{
+	width:70%;
+	height:100px;
+}
+.buttonbox{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+.checkvalue{
+	width: 70%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

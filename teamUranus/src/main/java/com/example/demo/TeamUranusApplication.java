@@ -9,5 +9,4 @@ public class TeamUranusApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TeamUranusApplication.class, args);
 	}
-
 }
