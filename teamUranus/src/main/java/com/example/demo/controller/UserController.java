@@ -1,18 +1,17 @@
 package com.example.demo.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.entity.LoginForm;
-import com.example.demo.entity.User;
+import com.example.demo.model.LoginForm;
+import com.example.demo.model.UserForm;
 import com.example.demo.service.UserService;
 
 
@@ -31,18 +30,21 @@ public class UserController {
 	
 	
 	@PostMapping("/login")
-	public String processLoginForm(@Valid @ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult) {
+	public String processLoginForm(@Validated @ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult) {
 	    if (bindingResult.hasErrors()) {
 	        return "login";
 	    }
 
+	    
 	    // ログイン処理
-	    User existingUser = userService.findByUserId(loginForm.getLoginId());
-
+	    UserForm existingUser = userService.findByUserId(loginForm.getLoginId());
+	    
 	    if (existingUser != null) {
 	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	        if (passwordEncoder.matches(loginForm.getPassword(), existingUser.getPassword())) {
 	            // ログイン成功
+	        
+	    	    
 	            return "redirect:/topMenu"; // ログイン成功時には/topMenuにリダイレクト
 	        }
 	    }
@@ -54,16 +56,22 @@ public class UserController {
 	
     @GetMapping("/newUser")
     public String view(Model model) {
-        model.addAttribute("newUser", new User());
+        model.addAttribute("newUser", new UserForm());
         return "newUser";
     }
     
     @PostMapping("/newUser")
-    public String register(Model model, @Valid @ModelAttribute("newUser") User newUser, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String register(@Validated @ModelAttribute("newUser") UserForm newUser, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "newUser";
         }
-
+        
+     // パスワードのバリデーションを行う
+        if (!userService.isPasswordValid(newUser.getPassword())) {
+            result.rejectValue("password", "error.user", "PassWordは指定された条件を満たしていません");
+            return "newUser";
+        }
+        
         // 新規ユーザーをデータベースに保存
         userService.save(newUser);
 

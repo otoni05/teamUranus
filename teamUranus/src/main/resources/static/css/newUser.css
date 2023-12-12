@@ -41,10 +41,18 @@ form {
 	margin-bottom: 30px;
 	transform: scaleX(0.9);
 }
+
+#errContainer {
+	justify-content: center;
+	margin-left: 10em;
+	color: red;
+	font-weight: bold;
+}
+
 form{
 	height: 50vh;
 }
-/* 見出しのスタイル設定 */
+
 h1 {
     font-size: 25px;
 }

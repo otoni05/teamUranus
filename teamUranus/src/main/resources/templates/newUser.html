@@ -22,9 +22,13 @@
 		<div class="container">
 			<div class="top">
 				<h3>新規会員登録</h3>
-				<span th:if="${#fields.hasErrors('*{newUser.userId}')}" th:errors="*{newUser.userId}"></span>
-				<span th:if="${#fields.hasErrors('*{newUser.mailAddress}')}" th:errors="*{newUser.mailAddress}"></span>
-				<span th:if="${#fields.hasErrors('*{newUser.password}')}" th:errors="*{newUser.password}"></span>
+				<div id="errContainer">
+					<span th:if="${#fields.hasErrors('*{newUser.userId}')}" th:errors="*{newUser.userId}"></span>
+					<br>
+					<span th:if="${#fields.hasErrors('*{newUser.mailAddress}')}" th:errors="*{newUser.mailAddress}"></span>
+					<br>
+					<span th:if="${#fields.hasErrors('*{newUser.password}')}" th:errors="*{newUser.password}"></span>
+				</div>
 			</div>
 			
 			<form method="post" th:action="@{/newUser}" th:object="${newUser}">
@@ -38,14 +42,14 @@
 				<div class="threeColumns">
 					<label for="mailAddress">MailAddress</label>
 					<div class="needColumn"><p>必須</p></div>
-					<input type="email" th:field="*{mailAddress}" class="formControl">
+					<input type="text" th:field="*{mailAddress}" class="formControl">
 				</div>
 				<br>
 				
 				<div class="threeColumns">
 					<label for="password">PassWord</label>
 					<div class="needColumn"><p>必須</p></div>
-					<input type="password" th:field="*{password}" class="formControl">
+					<input type="text" th:field="*{password}" class="formControl">
 				</div>
 				<input type="submit" value="登録" id="loginBtn">
 				<a th:href="@{/login}">ログイン画面へ</a>
