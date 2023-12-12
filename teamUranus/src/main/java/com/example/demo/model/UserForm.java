@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,8 +18,8 @@ public class UserForm {
 	@Column(name = "user_id")
 	@NotBlank(message = "User IDは必須項目です")
 	@Pattern(regexp = "^[ -~｡-ﾟ]*$", message = "User IDは半角英数字のみで入力してください")
-	@Pattern(regexp = "^[^#\\$%&'\\(\\)=~]*$", message = "User IDには特殊記号を使用しないでください")
 	@Size(min= 3, max = 10, message = "User IDは10文字以内で入力してください")
+	@Pattern(regexp = "^[^#\\$%&'\\(\\)=~]*$", message = "User IDには特殊記号を使用しないでください")
 	private String userId;
 	
 	@Column(name = "email")
@@ -27,10 +28,17 @@ public class UserForm {
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 	, message = "MailAddressは半角英数字のみで入力してください")
 	private String mailAddress;
-
+	
 	@Column(name = "password")
-	@NotBlank(message = "PassWordは必須項目です")
-	@Pattern(regexp = "^[ -~｡-ﾟ]*$", message = "PassWordは半角英数字のみで入力してください")
+	@Size(max = 255)
 	private String password;
 	
+	// メソッドの追加
+    public String getEmail() {
+        return this.mailAddress;
+    }
+
+    public void setEmail(String email) {
+        this.mailAddress = email;
+    }
 }

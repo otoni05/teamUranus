@@ -59,6 +59,13 @@ h1 {
 	outline: 2px solid #000;
 }
 
+.errContainer {
+	display: block;
+    color: red;
+    text-align: left;
+    width: 25em;
+    margin-left: 11em;
+}
 
 .twoColumn {
      display: flex;
