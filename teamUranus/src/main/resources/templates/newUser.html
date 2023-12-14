@@ -39,14 +39,14 @@
 			<br>
 
 			<div class="errContainer">
-				<span th:if="${#fields.hasErrors('*{mailAddress}')}" th:errors="*{mailAddress}"></span>
+				<span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}"></span>
 			</div>
 			<div class="threeColumns">
-				<label for="mailAddress">MailAddress</label>
+				<label for="email">MailAddress</label>
 				<div class="needColumn">
 					<p>必須</p>
 				</div>
-				<input type="text" th:field="*{mailAddress}" class="formControl">
+				<input type="text" th:field="*{email}" class="formControl">
 			</div>
 			<br>
 

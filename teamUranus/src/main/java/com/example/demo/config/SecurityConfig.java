@@ -20,8 +20,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .loginPage("/login")
                 .defaultSuccessUrl("/topMenu")
-                .failureUrl("/login?error")
-                .permitAll()
+                .failureUrl("/error")
         ).logout(logout -> logout
                 .logoutSuccessUrl("/")
         ).authorizeHttpRequests(authz -> authz
