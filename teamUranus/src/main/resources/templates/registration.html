@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>登録完了画面</title>
+	<!-- リセットCSSを読み込む処理を記述 -->
+	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+	<!-- cssファイルを読み込む処理を記述 -->
+	<link rel="stylesheet" href="/css/registration.css">
+
+</head>
+
+<body>
+	<header>
+		<img th:src="@{/img/DLlogo.png}" class="logo">
+		<h2 class="tytle">JavaTeamDevelopment</h2>
+	</header>
+
+	<div class="container">
+		<div class="top">
+			<h2>ログイン</h2>
+		</div>
+
+		<div id="info">
+			<p id="">下記内容の自己紹介の登録が完了しました！</p><br>
+			<br>
+			<p>管理番号：<span></span></p><br>
+			<p>名前：<span></span></p><br>
+			<p>フリガナ：<span></span></p><br>
+			<p>性別：<span></span></p><br>
+			<p>趣味：<span></span></p><br>
+			<p>一言：<span></span></p><br>
+			<br>
+			<p>自己紹介の内容を変更するには登録内容一覧画面から編集をして頂くか、管理者へお問い合わせください。</p>
+		</div>
+
+		<form th:action="@{/newUser}">
+
+			<input type="submit" id="topBtn" value="ＴＯＰへ戻る">
+
+		</form>
+
+	</div>
+
+</html>

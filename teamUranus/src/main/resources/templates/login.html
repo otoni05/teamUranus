@@ -19,33 +19,36 @@
 		<h2 class="tytle">JavaTeamDevelopment</h2>
 	</header>
 
-		<div class="container">
-			<div class="top">
-				<h2>ログイン</h2>
+	<div class="container">
+		<div class="top">
+			<h2>ログイン</h2>
+		</div>
+
+		<form method="post" th:action="@{/login}" th:object="${loginForm}">
+
+			<div class="errContainer">
+				<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
+			</div>
+
+			<div class="twoColumn">
+				<label for="loginId">UserID</label>
+				<input type="text" th:field="*{loginId}" class="formControl">
+			</div>
+			<br>
+
+			<div class="errContainer">
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 			</div>
 			
-			<form method="post" th:action="@{/login}"  th:object="${loginForm}">
-				
-				<div class="errContainer">
-					<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
-				</div>
-				<div class="twoColumn">
-					<label for="loginId">UserID</label>
-					<input type="text" th:field="*{loginId}" class="formControl">
-				</div>
-				<br>
-				
-				<div class="errContainer">
-					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-				</div>
-				<div class="twoColumn">
-					<label for="password">PassWord</label>
-					<input type="text" th:field="*{password}" class="formControl">
-				</div>
-				
-				<input type="submit" value="登録" id="loginBtn">
-				<a th:href="@{/newUser}">新規会員登録はこちら</a>
-			</form>
-			
-		</div>
+			<div class="twoColumn">
+				<label for="password">PassWord</label>
+				<input type="password" th:field="*{password}" class="formControl">
+			</div>
+
+			<input type="submit" value="登録" id="loginBtn">
+			<a th:href="@{/newUser}">新規会員登録はこちら</a>
+		</form>
+
+	</div>
+
 </html>

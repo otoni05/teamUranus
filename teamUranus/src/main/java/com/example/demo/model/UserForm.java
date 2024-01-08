@@ -1,14 +1,16 @@
 package com.example.demo.model;
 
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class UserForm {
 
 	@Id
@@ -19,15 +21,8 @@ public class UserForm {
 	private String email;
 	
 	@Column(name = "password")
-	@Size(max = 255)
 	private String password;
 	
-	// メソッドの追加
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@Column(name = "create_at")
+	private Timestamp createDate;
 }

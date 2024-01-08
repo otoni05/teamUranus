@@ -17,10 +17,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.formLogin(login -> login
-                .loginProcessingUrl("/login")
                 .loginPage("/login")
+                .usernameParameter("loginId")
                 .defaultSuccessUrl("/topMenu")
-                .failureUrl("/error")
+                .failureUrl("/login?error")
         ).logout(logout -> logout
                 .logoutSuccessUrl("/")
         ).authorizeHttpRequests(authz -> authz

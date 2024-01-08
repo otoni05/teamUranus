@@ -1,13 +1,18 @@
 package com.example.demo.service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import com.example.demo.model.LoginForm;
 import com.example.demo.model.UserForm;
 import com.example.demo.repository.UserRepository;
 
@@ -45,6 +50,40 @@ public class UserService {
 		        userRepository.save(userForm);
 		    }
 	}
+	
+	public void validateAndSaveUser(UserForm userForm, BindingResult result) {
+        String userIdErrorMessage = validateUserId(userForm.getUserId());
+        if (!userIdErrorMessage.isEmpty()) {
+            result.rejectValue("userId", "error.user", userIdErrorMessage);
+        }
+
+        String emailErrorMessage = validateEmail(userForm.getEmail());
+        if (!emailErrorMessage.isEmpty()) {
+            result.rejectValue("email", "error.user", emailErrorMessage);
+        }
+
+        String passwordErrorMessage = validatePassword(userForm.getPassword());
+        if (!passwordErrorMessage.isEmpty()) {
+            result.rejectValue("password", "error.user", passwordErrorMessage);
+        }
+
+        if (!result.hasErrors()) {
+            // 現在のUTCの瞬間を取得
+            Instant currentUtcInstant = Instant.now();
+
+            // 瞬間を秒までの精度に切り捨て
+            Instant truncatedInstant = currentUtcInstant.truncatedTo(ChronoUnit.SECONDS);
+
+            // InstantからTimestampへ変換
+            Timestamp currentUtcTimestamp = Timestamp.from(truncatedInstant);
+
+            // 新しいユーザーの作成日時を設定
+            userForm.setCreateDate(currentUtcTimestamp);
+
+            // 新規ユーザーをデータベースに保存
+            save(userForm);
+        }
+    }
 	
 	public String validateUserId(String userId) {
 		StringBuilder errorMessage = new StringBuilder();
@@ -113,32 +152,20 @@ public class UserService {
 		    }
 		    return errorMessage.toString();
 		}
-		 
+	
+	 public void validateLoginUser(LoginForm loginForm, BindingResult result) {
+	        String loginIdErrorMessage = validateUserId(loginForm.getLoginId());
+	        if (!loginIdErrorMessage.isEmpty()) {
+	            result.rejectValue("loginId", "error.loginForm", loginIdErrorMessage);
+	        }
 
-	public UserForm findByUserId(String userId) {
-		//return userRepository.findByUserId(userId);
-		System.out.println("Searching for user with ID: " + userId);
-	    UserForm user = userRepository.findByUserId(userId);
-	    if (user != null) {
-	        System.out.println("Found user: " + user.getUserId());
-	    } else {
-	        System.out.println("User not found for ID: " + userId);
+	        String passwordErrorMessage = validatePassword(loginForm.getPassword());
+	        if (!passwordErrorMessage.isEmpty()) {
+	            result.rejectValue("password", "error.loginForm", passwordErrorMessage);
+	        }
 	    }
-	    return user;
-	}
-	
-	
-	public boolean login(String userId, String plainPassword) {
-		UserForm user = userRepository.findByUserId(userId);
 
-		if (user != null) {
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			if (passwordEncoder.matches(plainPassword, user.getPassword())) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
+	    public boolean isPasswordValid(String rawPassword, String encodedPassword) {
+	        return passwordEncoder.matches(rawPassword, encodedPassword);
+	    }
 }
