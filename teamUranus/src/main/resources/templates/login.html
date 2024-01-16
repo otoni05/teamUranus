@@ -18,14 +18,16 @@
 		<img th:src="@{/img/DLlogo.png}" class="logo">
 		<h2 class="tytle">JavaTeamDevelopment</h2>
 	</header>
-
+	
 	<div class="container">
 		<div class="top">
 			<h2>ログイン</h2>
 		</div>
 
-		<form method="post" th:action="@{/login}" th:object="${loginForm}">
-
+		<form method="POST" action="/login" th:object="${loginForm}">
+			<!-- CSRFトークンの追加 -->
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			
 			<div class="errContainer">
 				<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
 			</div>
@@ -34,18 +36,17 @@
 				<label for="loginId">UserID</label>
 				<input type="text" th:field="*{loginId}" class="formControl">
 			</div>
-			<br>
 
 			<div class="errContainer">
 				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 			</div>
-			
+
 			<div class="twoColumn">
 				<label for="password">PassWord</label>
 				<input type="password" th:field="*{password}" class="formControl">
 			</div>
 
-			<input type="submit" value="登録" id="loginBtn">
+			<input type="submit" value="ログイン" id="loginBtn">
 			<a th:href="@{/newUser}">新規会員登録はこちら</a>
 		</form>
 

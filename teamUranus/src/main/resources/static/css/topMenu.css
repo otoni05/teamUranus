@@ -19,17 +19,16 @@ header {
     max-height: 100px; /* ロゴの高さを調整 */
     max-width: 100px;  /* ロゴの幅を調整 */
 }
+
 .tytle {
 	margin-right: 100px;
 }
-
 
 #topContainer {	
 	display:flex;
 	justify-content: center;
     width: 100%;
     height: 100%;
-    background-color:aqua;
 }
 
 form{

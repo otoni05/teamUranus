@@ -16,59 +16,58 @@ import com.example.demo.service.UserService;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-    
-    @GetMapping("/")
-    public String redirectToLogin() {
-        return "redirect:/login";
-    }
+	@Autowired
+	private UserRepository userRepository;
 
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("loginForm", new LoginForm());
-        return "login";
-    }
+	@GetMapping("/")
+	public String redirectToLogin() {
+		return "redirect:/login";
+	}
 
-    @PostMapping("/login")
-    public String processLoginForm(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult result, Model model) {
- 
-        userService.validateLoginUser(loginForm, result);
+	@GetMapping("/login")
+	public String showLoginForm(Model model) {
+		model.addAttribute("loginForm", new LoginForm());
+		return "login";
+	}
 
-        if (result.hasErrors()) {
-            model.addAttribute("login", loginForm);
-            return "login";
-        }
+	@PostMapping("/login")
+	public String processLoginForm(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult result,
+			Model model) {
+		userService.validateLoginUser(loginForm, result);
 
-        UserForm existingUser = userRepository.findByUserId(loginForm.getLoginId());
+		if (result.hasErrors()) {
+			model.addAttribute("login", loginForm);
+			return "login";
+		}
 
-        if (existingUser != null && userService.isPasswordValid(loginForm.getPassword(), existingUser.getPassword())) {
-            return "redirect:/topMenu";
-        }
+		UserForm existingUser = userRepository.findByUserId(loginForm.getLoginId());
 
-        model.addAttribute("login", loginForm);
-        return "login";
-    }
+		if (existingUser != null && userService.isPasswordValid(loginForm.getPassword(), existingUser.getPassword())) {
+			return "/topMenu";
+		}
 
-    @GetMapping("/newUser")
-    public String view(Model model) {
-        model.addAttribute("newUser", new UserForm());
-        return "newUser";
-        
-    }
+		model.addAttribute("login", loginForm);
+		return "redirect:/login";
+	}
 
-    @PostMapping("/newUser")
-    public String register(@ModelAttribute("newUser") UserForm userForm, BindingResult result) {
-        userService.validateAndSaveUser(userForm, result);
-        return result.hasErrors() ? "newUser" : "redirect:/login";
-    }
+	@GetMapping("/newUser")
+	public String view(Model model) {
+		model.addAttribute("newUser", new UserForm());
+		return "newUser";
 
-    @GetMapping("/topMenu")
-    public String viewTopMenu() {
-        return "topMenu";
-    }
+	}
+
+	@PostMapping("/newUser")
+	public String register(@ModelAttribute("newUser") UserForm userForm, BindingResult result) {
+		userService.validateAndSaveUser(userForm, result);
+		return result.hasErrors() ? "newUser" : "redirect:/login";
+	}
+
+	@GetMapping("/topMenu")
+	public String viewTopMenu() {
+		return "topMenu";
+	}
 }
-

@@ -21,7 +21,7 @@
 	<!-- ログインフォーム -->
 	<div class="container">
 		<div class="top">
-			<h3>新規会員登録</h3>
+			<h2>新規会員登録</h2>
 		</div>
 
 		<form method="post" th:action="@{/newUser}" th:object="${newUser}">
@@ -36,7 +36,7 @@
 				</div>
 				<input type="text" th:field="*{userId}" class="formControl">
 			</div>
-			<br>
+			
 
 			<div class="errContainer">
 				<span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}"></span>
@@ -48,7 +48,7 @@
 				</div>
 				<input type="text" th:field="*{email}" class="formControl">
 			</div>
-			<br>
+			
 
 			<div class="errContainer">
 				<!-- パスワードのバリデーションエラー -->

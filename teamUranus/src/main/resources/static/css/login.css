@@ -14,7 +14,7 @@ header {
 	margin-right: 30px;
 }
 
-.logo {
+.logo {	
 	margin-left: 30px;
     max-height: 100px; /* ロゴの高さを調整 */
     max-width: 100px;  /* ロゴの幅を調整 */
@@ -24,7 +24,7 @@ header {
 }
 
 .container {	
-    height: 100vh;
+    height: 100%;
 }
 
 .top,
@@ -36,10 +36,12 @@ form {
 }
 
 .top{
-	height: 20vh;
+	margin-top: 80px;
+	height: 10%;
 }
 form{
-	height: 30vh;
+	margin-top: 2%;
+	height: auto;
 }
 /* 見出しのスタイル設定 */
 h1 {
@@ -49,10 +51,11 @@ h1 {
 /* 入力欄のスタイル設定 */
 .formControl {
     outline: 1px solid rgb(0, 0, 0);
-    height: 40px;
+    height: 50px;
     justify-content: center;
-    width: 300px; /* 最大幅を設定 */
-    padding-right: 10px;
+    width: 370px; /* 最大幅を設定 */
+    padding-left: 10px; 
+    margin-bottom: 30px;
 }
 
 .formControl:focus{
@@ -60,17 +63,20 @@ h1 {
 }
 
 .errContainer {
-	display: block;
+	display: flex;
+	align-items: center;
     color: red;
     text-align: left;
-    width: 25em;
-    margin-left: 11em;
+    width: 40em;
+    padding-left: 14em;
+    height: 30px;
+    white-space: pre-line;
 }
 
 .twoColumn {
      display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    
 }
 
 /* ラベルと入力欄のスタイル設定 */
@@ -79,19 +85,20 @@ label {
 	align-items: center;
 	justify-content: center;
     font-weight: bold;
-    margin-right: 50px;
+    margin-right: 70px;
     width: 100px; 
     text-align: center;
 }
 
 /* ボタンのスタイル設定 */
 #loginBtn {
-    width: 150px;
+    width: 200px;
     height: 50px;
-    margin-top: 40px;
+    margin-top: 20px;
     
     background-color: rgb(163, 179, 241);
     color: rgb(0, 0, 0);
+    font-size: larger;
     font-weight: bold;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -106,9 +113,9 @@ label {
 }
 
 a {
-	margin-top: 30px;
+	margin-top: 40px;
 	text-decoration: none;
 	color: rgb(0, 128, 192);
 
-	font-size: small;
+	font-size:large;
 }
