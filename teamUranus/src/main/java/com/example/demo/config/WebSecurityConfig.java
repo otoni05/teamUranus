@@ -22,13 +22,15 @@ public class WebSecurityConfig {
 						.loginPage("/login")
 						.loginProcessingUrl("/authenticate")
 						.defaultSuccessUrl("/topMenu"));
+		
 		/**
 		 * URL認証設定
 		 */
 
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/login", "newUser", "/static/**", "/img/**", "/css/**").permitAll()
-				.requestMatchers("/topMenu").authenticated() //ダイレクトアクセス
+				.requestMatchers("/", "/login", "/newUser","/registration" ,"/static/**", "/img/**", "/css/**").permitAll()
+				.requestMatchers("/topMenu").authenticated() //ダイレクトアクセス処理
+//				.requestMatchers("/registration").authenticated() //ダイレクトアクセス処理
 				);
 		return http.build();
 

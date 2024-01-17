@@ -1,24 +1,85 @@
 /* 全体の高さを100%に設定 */
-html,
-body {
+html, body {
     height: 100%;
+    margin: 0; /* マージンをリセット */
+    overflow: hidden; /* スクロールバーを非表示 */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	height: 80px;
-	background-color: gray;
-	margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: gray;
+    margin-right: 30px;
 }
 
 .logo {
-	margin-left: 30px;
+    margin-left: 30px;
     max-height: 100px; /* ロゴの高さを調整 */
     max-width: 100px;  /* ロゴの幅を調整 */
 }
+
 .tytle {
-	margin-right: 100px;
+    margin-right: 100px;
+}
+
+.container {
+    flex: 1; /* コンテナが残りのスペースをいっぱいに使う */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color:rgb(200, 200, 200);
+}
+
+#subContainer {    
+    height: 60vh; /* 高さを自動調整 */
+    width: 1000px;    
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 13%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    line-height: 0.8;
+    word-wrap: break-word;
+}
+
+p {
+    margin: 10px;
+}
+
+.comment {
+    margin: 30px 0 30px 0;
+}
+
+a {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    text-decoration: none;
+    color: rgb(0, 128, 192);
+    font-size: large;
 }

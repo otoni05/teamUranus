@@ -2,6 +2,7 @@
 html,
 body {
     height: 100%;
+    background-color: rgb(200, 200, 200);
 }
 
 header {
@@ -36,9 +37,9 @@ form {
 }
 
 .top{
-	justify-content: center;
-	margin-top: 100px;
-	margin-bottom: 10px;
+	height: 12%;
+	justify-content: end;
+	margin-bottom: 2%;
 }
 
 h1 {
@@ -53,6 +54,7 @@ h1 {
     width: 400px; /* 最大幅を設定 */
     margin-left: 20px;
     padding-left: 10px; 
+    background-color: white;
 }
 
 .formControl:focus{

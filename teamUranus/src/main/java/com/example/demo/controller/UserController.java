@@ -50,11 +50,11 @@ public class UserController {
 		}
 
 		model.addAttribute("login", loginForm);
-		return "redirect:/login";
+		return "login";
 	}
 
 	@GetMapping("/newUser")
-	public String view(Model model) {
+	public String viewNewUser(Model model) {
 		model.addAttribute("newUser", new UserForm());
 		return "newUser";
 
@@ -69,5 +69,12 @@ public class UserController {
 	@GetMapping("/topMenu")
 	public String viewTopMenu() {
 		return "topMenu";
+	}
+	
+	@GetMapping("/registration")
+	public String viewRegistration() {
+//		model.addAttribute("registration", new UserForm());
+		return "registration";
+
 	}
 }

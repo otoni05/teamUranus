@@ -20,29 +20,24 @@
 	</header>
 
 	<div class="container">
-		<div class="top">
-			<h2>ログイン</h2>
+		<div id="subContainer">
+			<div class="top">
+				<h2>自己紹介の登録が完了しました！</h2>
+			</div>
+
+			<div id="info">
+				<p class="comment">下記内容の自己紹介の登録が完了しました！</p>
+				<p>管理番号：<span></span></p>
+				<p>名前：<span></span></p>
+				<p>フリガナ：<span></span></p>
+				<p>性別：<span></span></p>
+				<p>趣味：<span></span></p>
+				<p>一言：<span></span></p>
+				<p class="comment">自己紹介の内容を変更するには登録内容一覧画面から編集をして頂くか、管理者へお問い合わせください。</p>
+			</div>
+			<a th:href="@{/topMenu}">TOPへ戻る</a>
 		</div>
-
-		<div id="info">
-			<p id="">下記内容の自己紹介の登録が完了しました！</p><br>
-			<br>
-			<p>管理番号：<span></span></p><br>
-			<p>名前：<span></span></p><br>
-			<p>フリガナ：<span></span></p><br>
-			<p>性別：<span></span></p><br>
-			<p>趣味：<span></span></p><br>
-			<p>一言：<span></span></p><br>
-			<br>
-			<p>自己紹介の内容を変更するには登録内容一覧画面から編集をして頂くか、管理者へお問い合わせください。</p>
-		</div>
-
-		<form th:action="@{/newUser}">
-
-			<input type="submit" id="topBtn" value="ＴＯＰへ戻る">
-
-		</form>
-
+		
 	</div>
 
 </html>

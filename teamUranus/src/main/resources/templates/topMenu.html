@@ -21,13 +21,13 @@
 
 	<body>
 		<div id ="topContainer">
-			<form method="post">
+			<form method="POST">
 				<div class="parContainer">
 					<div class="index">
 						<h2>自己紹介登録</h2>
 					</div>
 					<div class="btn">
-						<input type="submit" value="登録に進む" id="regBtn" formaction="@{#}">
+						<input type="submit" value="登録に進む" id="regBtn" formaction="@{/registration}">
 					</div>
 					</div>
 			
@@ -45,7 +45,7 @@
 						<h2>自己紹介登録者一覧</h2>
 					</div>
 					<div class="btn">
-						<input type="submit" value="一覧を編集する" id="editBtn" formaction="#">
+						<input type="submit" value="一覧を編集する" id="editBtn" formaction="@{/registration}">
 					</div>
 				</div>
 			
