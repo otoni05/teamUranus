@@ -17,8 +17,10 @@ import com.example.demo.model.UserForm;
 import com.example.demo.repository.UserRepository;
 
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
 
+/**
+ * ユーザーサービスの実装クラスです。
+ */
 @Service
 @Transactional
 public class UserService {
@@ -30,34 +32,45 @@ public class UserService {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private Validator validator;
+	private ValidationChacker validationChacker;
 
+	/**
+	 * ユーザー情報を保存します。
+	 *
+	 * @param userForm 保存するユーザーフォーム
+	 */
 	public void save(@Validated UserForm userForm) {
 
 		// パスワードをハッシュ化してセット
 		String hashedPassword = passwordEncoder.encode(userForm.getPassword());
 
 		userForm.setPassword(hashedPassword);
-
-		Set<ConstraintViolation<UserForm>> violations = validator.validate(userForm);
-
+		// バリデーションを実行し、違反がなければデータベースに保存
+		Set<ConstraintViolation<UserForm>> violations = validationChacker.validate(userForm);
 		if (violations.isEmpty()) {
 			userRepository.save(userForm);
 		}
 	}
 
+	/**
+	 * ユーザーフォームのバリデーションを実行し、ユーザーを保存します。
+	 *
+	 * @param userForm ユーザーフォーム
+	 * @param result   バリデーション結果
+	 */
 	public void validateAndSaveUser(UserForm userForm, BindingResult result) {
-		String userIdErrorMessage = validateUserId(userForm.getUserId());
+		// ユーザーIDのバリデーションを実行し、エラーメッセージがあればリジェクト
+		String userIdErrorMessage = validationChacker.validateUserId(userForm.getUserId());
 		if (!userIdErrorMessage.isEmpty()) {
 			result.rejectValue("userId", "error.user", userIdErrorMessage);
 		}
-
-		String emailErrorMessage = validateEmail(userForm.getEmail());
+		// メールアドレスのバリデーションを実行し、エラーメッセージがあればリジェクト
+		String emailErrorMessage = validationChacker.validateEmail(userForm.getEmail());
 		if (!emailErrorMessage.isEmpty()) {
 			result.rejectValue("email", "error.user", emailErrorMessage);
 		}
-
-		String passwordErrorMessage = validatePassword(userForm.getPassword());
+		// パスワードのバリデーションを実行し、エラーメッセージがあればリジェクト
+		String passwordErrorMessage = validationChacker.validatePassword(userForm.getPassword());
 		if (!passwordErrorMessage.isEmpty()) {
 			result.rejectValue("password", "error.user", passwordErrorMessage);
 		}
@@ -80,88 +93,33 @@ public class UserService {
 		}
 	}
 
-	public String validateUserId(String userId) {
-		StringBuilder errorMessage = new StringBuilder();
-
-		if (userId == null || userId.trim().isEmpty()) {
-			errorMessage.append("User IDは必須項目です");
-		} else if (userId.length() < 3 || userId.length() > 10) {
-			errorMessage.append("User IDは10文字以内で入力してください");
-		} else if (!userId.matches("^[ -~｡-ﾟ]*$")) {
-			errorMessage.append("User IDは半角英数字のみで入力してください");
-		} else if (!userId.matches("^[^#\\$%&'\\(\\)=~]*$")) {
-			errorMessage.append("User IDには特殊記号を使用しないでください");
-		}
-
-		return errorMessage.toString();
-	}
-
-	public String validateEmail(String email) {
-
-		StringBuilder errorMessage = new StringBuilder();
-
-		if (email == null || email.isEmpty()) {
-			errorMessage.append("MailAddressは必須項目です");
-		} else if (!email.matches("^[ -~｡-ﾟ]*$")) {
-			errorMessage.append("MailAddressは半角英数字のみで入力してください");
-		} else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-			errorMessage.append("正しいMailAddress形式で入力してください");
-		}
-
-		return errorMessage.toString();
-
-	}
-
-	public String validatePassword(String password) {
-		StringBuilder errorMessage = new StringBuilder();
-
-		if (password == null || password.trim().isEmpty()) {
-			errorMessage.append("PassWordは必須項目です");
-
-		} else if (password.length() < 3 || password.length() > 10) {
-			errorMessage.append("PassWordは10文字以内、3文字以上で入力してください。");
-		} else {
-			// 特定の記号を排除することをチェック
-			boolean noSpecialCharacters = password.matches("[^#\\$%&'\\(\\)=~]*");
-
-			// 特殊記号が含まれる場合のエラーメッセージを優先
-			if (!noSpecialCharacters) {
-				errorMessage.append("PassWordは特殊記号を使用しないでください。");
-			} else {
-				// 大文字、小文字、数字をそれぞれ1文字以上含むことをチェック
-				boolean hasUppercase = password.matches(".*[A-Z].*");
-				boolean hasLowercase = password.matches(".*[a-z].*");
-				boolean hasDigit = password.matches(".*\\d.*");
-				boolean noHalfSizeNumber = password.matches("[a-zA-Z0-9]+$");
-
-				// 特殊記号以外の場合はエラーメッセージを追加しない
-				if (!hasUppercase || !hasLowercase || !hasDigit || !noHalfSizeNumber) {
-					if (!noHalfSizeNumber) {
-						errorMessage.append("PassWordは半角英数字のみで入力してください");
-
-					} else if (!hasUppercase || !hasLowercase || !hasDigit) {
-						errorMessage.append("PassWordは大文字小文字数字を組み合わせて入力してください。");
-					}
-				}
-			}
-		}
-		return errorMessage.toString();
-	}
-
+	/**
+	 * ログインフォームのバリデーションを実行します。
+	 *
+	 * @param loginForm ログインフォーム
+	 * @param result    バリデーション結果
+	 */
 	public void validateLoginUser(LoginForm loginForm, BindingResult result) {
-		// ログインIDのバリデーション
-		String loginIdErrorMessage = validateUserId(loginForm.getLoginId());
+		// ログインIDのバリデーションを実行し、エラーメッセージがあればリジェクト
+		String loginIdErrorMessage = validationChacker.validateUserId(loginForm.getLoginId());
 		if (!loginIdErrorMessage.isEmpty()) {
 			result.rejectValue("loginId", "error.loginForm", loginIdErrorMessage);
 		}
-
-		// パスワードのバリデーション
-		String passwordErrorMessage = validatePassword(loginForm.getPassword());
+		
+		// パスワードのバリデーションを実行し、エラーメッセージがあればリジェクト
+		String passwordErrorMessage = validationChacker.validatePassword(loginForm.getPassword());
 		if (!passwordErrorMessage.isEmpty()) {
 			result.rejectValue("password", "error.loginForm", passwordErrorMessage);
 		}
 	}
 
+	/**
+	 * 生パスワードとエンコードされたパスワードが一致するかどうかを検証します。
+	 *
+	 * @param rawPassword      生のパスワード
+	 * @param encodedPassword  エンコードされたパスワード
+	 * @return 一致する場合はtrue、それ以外はfalse
+	 */
 	public boolean isPasswordValid(String rawPassword, String encodedPassword) {
 		return passwordEncoder.matches(rawPassword, encodedPassword);
 	}

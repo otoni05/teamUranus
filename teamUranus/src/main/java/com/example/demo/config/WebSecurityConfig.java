@@ -7,35 +7,47 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Webセキュリティの設定を行うクラスです。
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+	/**
+	 * Spring Securityのフィルターチェーンを構成します。
+	 *
+	 * @param http HttpSecurityオブジェクト
+	 * @return SecurityFilterChainオブジェクト
+	 * @throws Exception 例外が発生した場合
+	 */
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		/**
-		 * ログイン時に起動するURLの指定 
-		 */
+		// ログイン時に起動するURLの指定
 		http.formLogin(
 				login -> login
 						.loginPage("/login")
 						.loginProcessingUrl("/authenticate")
 						.defaultSuccessUrl("/topMenu"));
-		
-		/**
-		 * URL認証設定
-		 */
 
+		// URL認証設定
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/login", "/newUser","/registration" ,"/static/**", "/img/**", "/css/**").permitAll()
-				.requestMatchers("/topMenu").authenticated() //ダイレクトアクセス処理
-//				.requestMatchers("/registration").authenticated() //ダイレクトアクセス処理
-				);
-		return http.build();
+				.requestMatchers("/", "/login", "/newUser", "/registration", "/static/**", "/img/**", "/css/**")
+				.permitAll()
+				// ダイレクトアクセス処理
+				.requestMatchers("/topMenu").authenticated()
 
+		);
+
+		return http.build();
 	}
 
+	/**
+	 * パスワードのハッシュ化に使用するBCryptPasswordEncoderを提供します。
+	 *
+	 * @return BCryptPasswordEncoderオブジェクト
+	 */
 	@Bean
 	BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

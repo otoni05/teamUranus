@@ -8,73 +8,66 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.model.LoginForm;
 import com.example.demo.model.UserForm;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
+/**
+ * ユーザー関連の操作を管理するためのControllerクラスです。
+ */
 @Controller
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private UserRepository userRepository;
+    /**
+     * 新しいユーザーを作成するためのフォームを表示します。
+     *
+     * @param model ビューで使用されるモデル
+     * @return 新しいユーザーフォームのビュー名
+     */
+    @GetMapping("/newUser")
+    public String viewNewUser(Model model) {
+        // 新しいユーザーフォームをモデルに追加
+        model.addAttribute("newUser", new UserForm());
+        // 新しいユーザーフォームのビューを表示
+        return "newUser";
+    }
 
-	@GetMapping("/")
-	public String redirectToLogin() {
-		return "redirect:/login";
-	}
+    /**
+     * 新しいユーザーの登録を処理します。
+     *
+     * @param userForm 登録フォームを介して提出されたユーザーフォームデータ
+     * @param result   バリデーションエラーのためのバインディング結果
+     * @return エラーがある場合は新しいユーザーフォーム、それ以外は正常に登録された場合のビュー名
+     */
+    @PostMapping("/newUser")
+    public String register(@ModelAttribute("newUser") UserForm userForm, BindingResult result) {
+        // ユーザーのバリデーションと保存を行うサービスメソッドを呼び出し
+        userService.validateAndSaveUser(userForm, result);
+        // エラーがある場合は新しいユーザーフォームのビュー、それ以外はログインページにリダイレクト
+        return result.hasErrors() ? "newUser" : "redirect:/login";
+    }
 
-	@GetMapping("/login")
-	public String showLoginForm(Model model) {
-		model.addAttribute("loginForm", new LoginForm());
-		return "login";
-	}
+    /**
+     * トップメニューのビューを表示します。
+     *
+     * @return トップメニューのビュー名
+     */
+    @GetMapping("/topMenu")
+    public String viewTopMenu() {
+        // トップメニューのビューを表示
+        return "topMenu";
+    }
 
-	@PostMapping("/login")
-	public String processLoginForm(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult result,
-			Model model) {
-		userService.validateLoginUser(loginForm, result);
-
-		if (result.hasErrors()) {
-			model.addAttribute("login", loginForm);
-			return "login";
-		}
-
-		UserForm existingUser = userRepository.findByUserId(loginForm.getLoginId());
-
-		if (existingUser != null && userService.isPasswordValid(loginForm.getPassword(), existingUser.getPassword())) {
-			return "/topMenu";
-		}
-
-		model.addAttribute("login", loginForm);
-		return "login";
-	}
-
-	@GetMapping("/newUser")
-	public String viewNewUser(Model model) {
-		model.addAttribute("newUser", new UserForm());
-		return "newUser";
-
-	}
-
-	@PostMapping("/newUser")
-	public String register(@ModelAttribute("newUser") UserForm userForm, BindingResult result) {
-		userService.validateAndSaveUser(userForm, result);
-		return result.hasErrors() ? "newUser" : "redirect:/login";
-	}
-
-	@GetMapping("/topMenu")
-	public String viewTopMenu() {
-		return "topMenu";
-	}
-	
-	@GetMapping("/registration")
-	public String viewRegistration() {
-//		model.addAttribute("registration", new UserForm());
-		return "registration";
-
-	}
+    /**
+     * 登録ページのビューを表示します。
+     *
+     * @return 登録ページのビュー名
+     */
+    @GetMapping("/registration")
+    public String viewRegistration() {
+        // 登録ページのビューを表示
+        return "registration";
+    }
 }
