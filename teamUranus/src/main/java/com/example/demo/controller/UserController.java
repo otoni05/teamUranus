@@ -57,6 +57,7 @@ public class UserController {
     @GetMapping("/topMenu")
     public String viewTopMenu() {
         // トップメニューのビューを表示
+    	System.out.println("topMenu");
         return "topMenu";
     }
 
@@ -68,6 +69,7 @@ public class UserController {
     @GetMapping("/registration")
     public String viewRegistration() {
         // 登録ページのビューを表示
+    	System.out.println("registration");
         return "registration";
     }
 }

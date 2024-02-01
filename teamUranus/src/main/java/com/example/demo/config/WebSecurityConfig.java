@@ -33,12 +33,10 @@ public class WebSecurityConfig {
 
 		// URL認証設定
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/login", "/newUser").permitAll()
-				.requestMatchers("/static/**", "/img/**", "/css/**").permitAll() 
-				// ダイレクトアクセス処理
-				.requestMatchers("/topMenu", "/registration").authenticated()
-//				.requestMatchers("/topMenu", "/registration").hasRole("USER")
-		);
+				.requestMatchers("/login", "/newUser", "/topMenu", "/registration").permitAll()
+				.requestMatchers("/static/**", "/img/**", "/css/**").permitAll());
+		// ダイレクトアクセス処理
+		//.requestMatchers("/topMenu", "/registration").authenticated()
 
 		return http.build();
 	}

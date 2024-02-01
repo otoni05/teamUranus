@@ -49,7 +49,7 @@ public class LoginController {
 		// ユーザーが存在し、パスワードが正しい場合はトップメニューのビューを表示
 		if (existingUser != null && userService.isPasswordValid(loginForm.getPassword(), existingUser.getPassword())) {
 			// トップメニューのビューを表示
-			return "topMenu";
+			return "registration";
 		}
 		
 		// ログインに失敗した場合はログインフォームのビューを表示
