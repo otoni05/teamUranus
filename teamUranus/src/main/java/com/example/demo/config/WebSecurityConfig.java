@@ -33,11 +33,11 @@ public class WebSecurityConfig {
 
 		// URL認証設定
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/login", "/newUser", "/registration", "/static/**", "/img/**", "/css/**")
-				.permitAll()
+				.requestMatchers("/login", "/newUser").permitAll()
+				.requestMatchers("/static/**", "/img/**", "/css/**").permitAll() 
 				// ダイレクトアクセス処理
-				.requestMatchers("/topMenu").authenticated()
-
+				.requestMatchers("/topMenu", "/registration").authenticated()
+//				.requestMatchers("/topMenu", "/registration").hasRole("USER")
 		);
 
 		return http.build();
