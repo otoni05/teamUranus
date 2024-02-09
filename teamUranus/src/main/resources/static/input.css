@@ -2,141 +2,200 @@
 
 
 /* ==================common================== */
-body{
+body {
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    background-color: rgb(200, 200, 200);
+}
+
+ul {
     margin: 0;
     padding: 0;
     -webkit-text-size-adjust: 100%;
 }
-ul{
-    margin: 0;
-    padding: 0;
-    -webkit-text-size-adjust: 100%;
-}
-a{
+
+a {
     text-decoration: none;
 }
-li{
+
+li {
     margin: 0;
     padding: 0;
-    list-style:none;
+    list-style: none;
 }
-h2{
+
+h2 {
     font-size: 2rem;
     margin-bottom: 14px;
 }
-span{
+
+span {
     text-align: left;
 }
-p{
+
+p {
     overflow-wrap: break-word;
 }
 
 /* ==================header==================== */
-
-header{
-    padding: 5px 4% 20px;
+.navn {
+	width: 100%;
+}
+.title{
+	font-weight: bold;
+	font-size: 1.5em;
+	padding-right: 20px;
+	letter-spacing: 0.5px;
+}
+header {
+    padding: 20px 4% ;
     background-color: gray;
-    justify-content:space-between;
+    display: flex;
 }
-header a{
+
+header a {
     color: white;
 }
-header h1{
+
+header h1 {
     color: white;
+    margin-left: 30px;
+    max-height: 100px;
+    max-width: 100px;
 }
 .headerMenu{
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.headerMenu li{
-    margin-left: 24px;
-    color: black;
-    font-size: 25px;
-    font-weight:bold;
+.logo{
+	width: 50px;
+	height: 50px;
+	aspect-ratio: 1/1;
 }
-footer{
-	margin: 0;
-	padding: 0;
-	
-}
-body{
-    background-color: #f5f5f5;
-	
-}
-main{
-    margin: 0 auto;
-	text-align: center;
-}
-main h1{
-	text-align: center;
-}
-#formtitle {
-	padding: 70px 0 20px 0;
-	margin: 0;
-    font-size: 20px;
-	font-weight:lighter;
-}
-.formbox {
-	display: inline-block;
-	text-align: left;
-	width: 800px;
-}
-form span{
-	margin-right: 20px;
+.tytle {
+    margin-right: 100px;
 }
 
-.formbox span{
-	width: 5em;
-	margin:0 10px 0 0;
-	display:inline-block;
-	vertical-align:top;
-	text-align: center;
+/* ==================main==================== */
+main {
+    margin: 0 auto;
+    text-align: center;
 }
-.formbox ul li:nth-of-type(1){
-	padding: 10px 0 30px 0;
+
+#formtitle {
+    padding: 70px 0 20px 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: lighter;
 }
-.formbox ul li:nth-of-type(2){
-	padding: 0 0 25px 0;
+
+.formbox {
+    display: inline-block;
+    text-align: left;
+    width: 800px;
 }
-.formbox li{
-	padding-bottom: 10px;
-	
+
+form span {
+    margin-right: 20px;
 }
-.formbox ul li:nth-of-type(4){
-	padding: 20px 0 30px 0;
+
+.formbox span {
+    margin: 0 59px 0 0;
+    vertical-align: top;
 }
-.button{
-	margin: 0 20px 20px 40px;
-	padding: 20px 60px 20px 60px;
-	background-color: lightblue;
-	border: lightblue;
-	font-weight:bold;
+
+
+.formbox ul li:nth-of-type(1) {
+    padding: 10px 0 30px 0;
 }
-input.name{
-	width: 80%;
+
+.formbox ul li:nth-of-type(2) {
+    padding: 0 0 25px 0;
 }
-.hitokoto{
-	width:80%;
-	height:100px;
+
+.formbox li {
+    padding-bottom: 10px;
 }
-.buttonbox{
-	margin: 0;
-	padding: 0;
-	text-align: center;
+
+.formbox ul li:nth-of-type(4) {
+    padding: 0 0 40px 0;
 }
-.checkvalue{
-	width: 600px;
+
+.button {
+    margin: 0 20px 20px 40px;
+    padding: 20px 60px 20px 60px;
+    background-color: lightblue;
+    border: lightblue;
+    font-weight: bold;
+}
+.columns{
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 112%;
+}
+.error-message{
+	width:70%;
+	display: block;
+}
+input.name {
+    width: 62%;
+    margin: 0 210px 0 10px;
+}
+.name_margin{
+	margin-right: 15px;
+}
+
+.hitokoto {
+    width: 70%;
+    height: 100px;
+}
+
+.buttonbox {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.checkvalue {
+    width: 614px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 7px;
+}
+checkvalue_gender{
+    width: 600px;
     display: inline-block;
 }
-.checkvalue label{
-    margin-right: 45px;
+.checkvalue_columns{
+	margin-left: 10px;
+	width: 500px;
+	height: 25px;
+}
+.hobby_title{
+	margin-right: 14px;
+}
+.checkvalue_hobby{
+	padding-right: 50px;
+}
+.box_margin{
+	margin-left: 23px;
+}
+/* スタイル付きのエラーメッセージ */
+
+.required{
+	margin-left: 10px;
 }
 
-/* スタイル付きのエラーメッセージ */
 .error-message {
     color: red;
-    font-size: 12px;
+    font-weight: bold;
     display: block;
+    width: 400px;
+    padding-left: 130px;
 }
 
 /* エラーがある場合のスタイル */
@@ -146,7 +205,11 @@ input.name{
     border: 1px solid red;
 }
 
-
-
-
-
+/* 必須項目カラムのスタイル設定 */
+.required {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}

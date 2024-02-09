@@ -3,113 +3,99 @@ package com.example.demo.service;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import com.example.demo.model.UserForm;
-import com.example.demo.repository.UserRepository;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
+/**
+ * ユーザーサービスの実装クラス
+ */
 @Service
-@Transactional
-public class UserService<passwordEncoder> {
+public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private ValidationChacker validationChecker;
 
-    @Autowired
-    private Validator validator;
 
-    // ユーザー情報の保存メソッド
-    public void save(UserForm userForm) {
 
-        // バリデーション実行
-        Set<ConstraintViolation<UserForm>> violations = validator.validate(userForm);
-        if (violations.isEmpty()) {
-            // バリデーションエラーがなければ保存
-            userRepository.save(userForm);
-        }
-    }
-
-    // ユーザー情報のバリデーションと保存メソッド
+    /**
+     * ユーザーフォームのバリデーションを実行し、ユーザーを保存
+     *
+     * @param userForm ユーザーフォーム
+     * @param result   バリデーション結果
+     */
     public void validateAndSaveUser(UserForm userForm, BindingResult result) {
-        // 各フィールドのバリデーションメソッド呼び出し
+        // 名前のバリデーションを実行
         validateName(userForm.getName(), result);
-        validateFurigana(userForm.getFurigana(), result);
-        validateHobbies(userForm.getHobbies(), result);
 
+        // フリガナのバリデーションを実行
+        validateKana(userForm.getKana(), result);
+
+        // 趣味のバリデーションを実行
+        validateHobby(userForm.getHobby(), result);
+
+        // 他の項目に対するバリデーションを必要に応じて追加
+
+        // バリデーション結果にエラーがない場合に処理を実行
         if (!result.hasErrors()) {
-            // バリデーションエラーがなければ保存
+            // 現在のUTCの瞬間を取得
             Instant currentUtcInstant = Instant.now();
+
+            // 瞬間を秒までの精度に切り捨て
             Instant truncatedInstant = currentUtcInstant.truncatedTo(ChronoUnit.SECONDS);
+
+            // InstantからTimestampへ変換
             Timestamp currentUtcTimestamp = Timestamp.from(truncatedInstant);
-            userForm.setCreateDate(currentUtcTimestamp);
-            save(userForm);
+
+            // 新しいユーザーの作成日時を設定
+            userForm.setCreatedAt(currentUtcTimestamp);
+
+            // 新規ユーザーをデータベースに保存
+            // (実際の保存処理はRepositoryに依存します)
+            // userRepository.save(userForm);
         }
     }
 
-    // 名前のバリデーションメソッド
-    public String validateName(String name, BindingResult result) {
+    /**
+     * 名前のバリデーションを実行します。
+     *
+     * @param name   名前
+     * @param result バリデーション結果
+     */
+    public void validateName(String name, BindingResult result) {
         if (name == null || name.trim().isEmpty()) {
-            result.rejectValue("name", "error.user", "名前は必須項目です");
+            result.rejectValue("name", "error.user", "名前は必須項目です。");
         } else if (name.length() > 10) {
-            result.rejectValue("name", "error.user", "名前は10文字以内で入力してください");
+            result.rejectValue("name", "error.user", "名前は10文字以内で入力してください。");
         }
-        return "";
     }
 
-    // フリガナのバリデーションメソッド
-    public String validateHurigana(String hurigana, BindingResult result) {
-        if (hurigana == null || hurigana.trim().isEmpty()) {
-            result.rejectValue("hurigana", "error.user", "フリガナは必須項目です");
-        } else if (hurigana.length() > 20) {
-            result.rejectValue("hurigana", "error.user", "フリガナは20文字以内で入力してください");
+    /**
+     * フリガナのバリデーションを実行します。
+     *
+     * @param kana   フリガナ
+     * @param result バリデーション結果
+     */
+    public void validateKana(String kana, BindingResult result) {
+        if (kana == null || kana.trim().isEmpty()) {
+            result.rejectValue("kana", "error.user", "フリガナは必須項目です。");
+        } else if (kana.length() > 20) {
+            result.rejectValue("kana", "error.user", "フリガナは20文字以内で入力してください。");
         }
-        return "";
     }
-
-    // 趣味のバリデーションメソッド
-    public String validateHobbies(String[] hobbies, BindingResult result) {
-        if (hobbies == null || hobbies.length == 0) {
-            result.rejectValue("hobbies", "error.user", "趣味は必須項目です。1つ以上選んでください。");
+    /**
+     * 趣味のバリデーションを実行します。
+     *
+     * @param hobby 趣味
+     * @param result バリデーション結果
+     */
+    public void validateHobby(String hobby, BindingResult result) {
+        if (hobby == null || hobby.trim().isEmpty()) {
+            result.rejectValue("hobby", "error.user", "趣味は必須項目です。1つ以上選んでください。");
         }
-        return "";
+        // 他の趣味のバリデーションルールを必要に応じて追加
     }
-
-
-
-   
-
-	public String validateName(String name) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public String validateFurigana(String furigana) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public String validateHobbies(String hobbies) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public void validateHobbies(String hobbies, BindingResult result) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
-
-	public void validateFurigana(String furigana, BindingResult result) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
-
 }
-
-

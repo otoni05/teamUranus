@@ -1,71 +1,104 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/confirmation.css">
-	<title>Input screen</title>
+    <link rel="stylesheet" type="text/css" href="../static/confirmScreen.css">
+    <link th:href="@{/confirmScreen.css}" rel="stylesheet">
+    <title>Confirmation screen</title>
 </head>
 <body>
-	<header>
-    <h1></h1>
-    <nav>
-        <ul class="headerMenu">
-            <li><img src="../static/image/rogo.png" alt=""></li>
-            <li>JavaTeamDevelopment</li>
-        </ul>
-    </nav>
+    <header>
+        <nav class="navn">
+            <ul class="headerMenu">
+                <li><img th:src="@{/image/logo.png}" class="logo"></li>
+                <li class="title">JavaTeamDevelopment</li>
+            </ul>
+        </nav>
     </header>
     
     <main>
-		<h1 id="formtitle">
-			自己紹介登録確認
-		</h1>
-		
-		<form class="formbox" method="POST" action="input.html">
-		  <ul>
-			  
-		    <li>
-		      <label><span>名前</span>
-		      <input type="text" name="name" class="name">
-		      </label>
-		    </li>
-		    <li>
-		      <label><span>フリガナ</span>
-		      <input type="text" name="name" class="name">
-		      </label>
-		    </li>
-		    
-		    <li>
-		      <p class = "radio">
-		   		<span class = "title">性別</span>
-		      		<input type="text" name="name" class="name">
-		      </p> 
-		    </li>
-		      <p class="check">
-				<span class = fromTitle>趣味</span>
-		      		<input type="text" name="name" class="name">
-		      </p>
-		    </li>
-		    
-		    <li>
-		      <label><span>一言</span>
-		      <textarea name="hitokoto" rows="4" cols="40" class="hitokoto" id="inputphonetic"></textarea>
-		      </label>
-		    </li>
-		    
-		  </ul>
-		  <p class = "buttonbox">
-			  <input type="submit" value="戻る" class = "button">
-			  <input type="reset" value="完了" class = "button">
-		  </p>
-		</form>
-		
-	</main>
+        <h1 id="formtitle">
+            自己紹介登録確認
+        </h1>
+        
+        <form class="formbox" method="POST" action="/confirmation">
 
-	<footer>
-		
-	</footer>
+          <ul>
+              
+            <li>
+              <label><span>名前</span>
+              <input type="text" name="name" class="name" th:value="${userForm.name}" readonly>
+              </label>
+            </li>
+            <li>
+              <label><span>フリガナ</span>
+              <input type="text" name="kana" class="name" th:value="${userForm.kana}" readonly>
+              </label>
+            </li>
+             <li>
+                <p class="radio">
+                    <span class="fromTitle">性別</span>
+                    <!-- input 要素内に表示 -->
+                    <input type="text" name="gender" class="name" th:value="${userForm.gender == 'male' ? '男性' : '女性'}" readonly>
+                </p>
+            </li>
+            <li>
+                <p class="check">
+                    <span class="fromTitle">趣味</span>
+                    <!-- input 要素内に表示 -->
+                    <input type="text" name="hobbies" class="name" th:value="${userForm.hobby}" readonly>
+                </p>
+            </li>
+
+            <li>
+              <div><span>一言</span>
+              <input name="word" type="text" class="hitokoto" readonly th:value="${userForm.word}">
+    		  </div>
+            </li>
+            
+          </ul>
+         
+        <p class="buttonbox">
+            <!-- type="reset" を type="button" に変更し、onclick イベントを追加 -->
+            <input type="button" value="戻る" class="button" onclick="history.back()">
+            <input type="submit" value="完了" class="button">
+        </p>
+    </form>
+
+	<script>
+    function resetFormAndNavigate() {
+        // フォーム内の各入力要素の値を保存
+        var formValues = {};
+        var formElements = document.getElementById('inputForm').elements;
+        for (var i = 0; i < formElements.length; i++) {
+            if (formElements[i].type !== 'button' && formElements[i].type !== 'submit' && formElements[i].type !== 'reset') {
+                formValues[formElements[i].name] = formElements[i].value;
+            }
+        }
+
+        // フォームをリセット
+        document.getElementById('inputForm').reset();
+
+        // 入力画面に遷移
+        window.location.href = '/input';
+
+        // 入力画面が読み込まれた際に保存した値を復元
+        window.onload = function () {
+            for (var key in formValues) {
+                if (formValues.hasOwnProperty(key)) {
+                    document.getElementsByName(key)[0].value = formValues[key];
+                }
+            }
+        };
+    }
+</script>
+
+    </main>
+
+    <footer>
+        
+    </footer>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,82 +5,153 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/input.css">
+    <link th:href="@{/input.css}" rel="stylesheet">
     <script src="../static/script.js" defer></script>
     <title>Input screen</title>
 </head>
 <body>
     <header>
-        <h1></h1>
-        <nav>
+        <nav class="navn">
             <ul class="headerMenu">
-                <li><img th:src="@{/image/rogo.png}" class="logo"></li>
-                <li>JavaTeamDevelopment</li>
+                <li><img th:src="@{/image/logo.png}" class="logo"></li>
+                <li class="title">JavaTeamDevelopment</li>
             </ul>
         </nav>
     </header>
+    
+    <script>
+		function validateForm() {
+    // 全てのエラーメッセージをリセット
+    resetErrorMessages();
+
+    // バリデーションを行う
+    let valid = true;
+
+    // 名前のバリデーション
+    const nameInput = document.getElementById('inputname');
+    const nameError = document.getElementById('name-error');
+    if (nameInput.value === '') {
+        nameError.innerText = '名前は必須項目です。';
+        valid = false;
+    } else if (nameInput.value.length > 10) {
+        nameError.innerText = '名前は10文字以内で入力してください。';
+        valid = false;
+    }
+
+    // フリガナのバリデーション
+    const phoneticInput = document.getElementById('inputphonetic');
+    const phoneticError = document.getElementById('phonetic-error');
+    if (phoneticInput.value === '') {
+        phoneticError.innerText = 'フリガナは必須項目です。';
+        valid = false;
+    } else if (phoneticInput.value.length > 20) {
+        phoneticError.innerText = 'フリガナは20文字以内で入力してください。';
+        valid = false;
+    }
+
+
+    // 趣味のバリデーション（一つ以上選択が必要）
+    const hobbyCheckboxes = document.querySelectorAll('input[name="hobby"]:checked');
+    const hobbyError = document.getElementById('hobby-error');
+    if (hobbyCheckboxes.length === 0) {
+        hobbyError.innerText = '趣味は必須項目です。1つ以上選んでください。';
+        valid = false;
+    }
+
+    // 一言のバリデーション
+    const hitokotoTextarea = document.querySelector('textarea[name="hitokoto"]');
+    const hitokotoError = document.getElementById('hitokoto-error');
+    if (hitokotoTextarea.value === '') {
+        hitokotoError.innerText = '一言は必須項目です。';
+        valid = false;
+    }
+
+    return valid;
+}
+
+// 全てのエラーメッセージをリセットする関数
+function resetErrorMessages() {
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(function (errorMessage) {
+        errorMessage.innerText = '';
+    });
+}
+
+	</script>
     
     <main>
        <h1 id="formtitle">
             自己紹介の内容を記入してください
         </h1>
         
-        <form th:action="@{/confirmation}" th:object="${userData}" method="post" class="formbox" onsubmit="return validateForm();">
+ 		<!-- フォームの開始 -->
+        <form th:action="@{/input}" th:object="${userForm}" method="post" class="formbox" onsubmit="return validateForm();">
+     <!-- 入力フォームの内容は省略 -->
             <ul>
                 <li>
-                    <label><span>名前</span>
-                        <input type="text" name="name" class="name" id="inputname" required>
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></span>
+                    <label class="columns">
+						 <p class="name_margin">名前</p>
+						 <p class="required">必須</p>
+                    	<input type="text" name="name" class="name" id="inputname" th:value="${userForm.name}">
                     </label>
-                    <span id="name-error" class="error-message"></span>
                 </li>
 
-                <li>
-                    <label><span>フリガナ</span>
-                        <input type="text" name="name" class="name" id="inputphonetic" required>
-                    </label>
-                    <span id="phonetic-error" class="error-message"></span>
-                </li>
 
                 <li>
+                    <span th:if="${#fields.hasErrors('kana')}" th:errors="*{kana}" class="error-message"></span>
+                    <label class="columns">
+						 <p>フリガナ</p>
+						 <p class="required">必須</p>
+                        <input type="text" name="kana" class="name" id="inputphonetic" th:value="${userForm.kana}">
+                    </label>
+                </li>
+
+                <li class="box_margin">
                     <p class="radio">
-                        <span class="title">性別</span>
-                        <label class="checkvalue">
-                            <label><input class="checkradio" type="radio" name="seibetu" value="male" required>男性</label>
-                            <label><input class="checkradio" type="radio" name="seibetu" value="female" required>女性</label>
+                        <span class="gender">性別</span>
+                        <label class="checkvalue_gender">
+                            <label><input class="checkradio" type="radio" name="gender" value="male" th:checked="${userForm.gender == 'male'}">男性</label>
+                            <label><input class="checkradio" type="radio" name="gender" value="female"  th:checked="${userForm.gender == 'female'}">女性</label>
                         </label>
                     </p>
                 </li>
 
                 <li>
-                    <p class="check">
-                        <span class="fromtitle">趣味</span>
-                        <label class="checkvalue">
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="drama" required>映画</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="manga" required>マンガ</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="sports" required>スポーツ</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="gourmet" required>グルメ</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="game" required>ゲーム</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="woman" required>アニメ</label>
-                            <label><input class="checkradio" type="checkbox" name="hobby" value="others" required>その他</label>
-                        </label>
-                    </p>
-                </li>
-
-                <li>
-                    <label><span>一言</span>
-                        <textarea name="hitokoto" rows="4" cols="40" class="hitokoto" required></textarea>
+                    <span th:if="${#fields.hasErrors('hobby')}" th:errors="*{hobby}" class="error-message"></span>
+                    <label class="checkvalue">
+                    	<p class="hobby_title">趣味</p>
+						<p class="required">必須</p>
+                        <!-- 各チェックボックスに  を追加 -->
+                        <div class="checkvalue_columns">
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="映画" th:checked="${userForm.hobby.contains('映画')}">映画</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="マンガ" th:checked="${userForm.hobby.contains('マンガ')}">マンガ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="スポーツ" th:checked="${userForm.hobby.contains('スポーツ')}">スポーツ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="グルメ" th:checked="${userForm.hobby.contains('グルメ')}">グルメ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="ゲーム" th:checked="${userForm.hobby.contains('ゲーム')}">ゲーム</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="アニメ" th:checked="${userForm.hobby.contains('アニメ')}">アニメ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="その他" th:checked="${userForm.hobby.contains('その他')}">その他</label>
+						</div>
                     </label>
-                    <span id="hitokoto-error" class="error-message"></span>
+                </li>
+
+
+                <li class="box_margin">
+                    <label><span>一言</span>
+                        <input name="word" rows="4" cols="40" class="hitokoto" type="text" th:value="${userForm.word}"></input>
+                        <span th:if="${#fields.hasErrors('word')}" th:errors="*{word}" class="error-message"></span>
+                    </label>
                 </li>
                 
                 <li>
                     <p class="buttonbox">
                         <input type="reset" value="戻る" class="button">
-                        <input type="submit" value="送信" class="button">
+                        <input type="submit" value="次へ" class="button">
                     </p>
                 </li>
             </ul>
         </form>
-
+        
         <!-- バリデーションエラーメッセージの表示 
         <div th:if="${validationError}" class="error-message">
             入力内容に誤りがあります。再度入力してください。
@@ -91,7 +161,7 @@
 	<footer>
 		
 	</footer>    
-	<script src="validation.js"></script>
+	<script src="../static/Validation.js"></script>
 
 </body>
 </html>

@@ -27,6 +27,7 @@ function validateForm() {
         valid = false;
     }
 
+
     // 趣味のバリデーション（一つ以上選択が必要）
     const hobbyCheckboxes = document.querySelectorAll('input[name="hobby"]:checked');
     const hobbyError = document.getElementById('hobby-error');
