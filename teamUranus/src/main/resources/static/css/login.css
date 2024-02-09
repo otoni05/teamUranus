@@ -1,134 +1,138 @@
 /* 全体の高さを100%に設定 */
 html,
 body {
-	height: 100%;
-	background-color: rgb(200, 200, 200);
+    height: 100%;
+    background-color: rgb(200, 200, 200);
 }
 
+/* ヘッダーのスタイル設定 */
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	height: 80px;
-	background-color: gray;
-	margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: gray;
+    margin-right: 30px;
 }
 
+/* ロゴのスタイル設定 */
 .logo {
-	margin-left: 30px;
-	max-height: 100px;
-	/* ロゴの高さを調整 */
-	max-width: 100px;
-	/* ロゴの幅を調整 */
+    margin-left: 30px;
+     /* ロゴの高さを調整 */
+    max-height: 100px;
+    /* ロゴの幅を調整 */
+    max-width: 100px; 
 }
 
+/* タイトルのスタイル設定 */
 .tytle {
-	margin-right: 100px;
+    margin-right: 100px;
 }
 
+/* コンテナのスタイル設定 */
 .container {
-	height: 100%;
+    height: 100%;
 }
 
+/* トップとフォームのスタイル設定 */
 .top,
 form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
 }
 
+/* トップのスタイル設定 */
 .top {
-	height: 12%;
+    height: 12%;
 }
 
+/* フォームのスタイル設定 */
 form {
-	margin-top: 2%;
-	height: auto;
+    margin-top: 2%;
+    height: auto;
 }
 
 /* 見出しのスタイル設定 */
 h1 {
-	font-size: 25px;
+    font-size: 25px;
 }
 
 /* 入力欄のスタイル設定 */
 .formControl {
-	outline: 1px solid rgb(0, 0, 0);
-	height: 50px;
-	justify-content: center;
-	width: 370px;
-	/* 最大幅を設定 */
-	padding-left: 10px;
-	background-color: white;
+    outline: 1px solid rgb(0, 0, 0);
+    height: 50px;
+    justify-content: center;
+    width: 370px; /* 最大幅を設定 */
+    padding-left: 10px;
+    background-color: white;
 }
 
 .formControl:focus {
-	outline: 2px solid #000;
+    outline: 2px solid #000;
 }
 
+/* エラーコンテナのスタイル設定 */
 .errContainer {
-	display: flex;
-	align-items: center;
-	color: red;
-	text-align: left;
-	width: 40em;
-	padding-left: 14em;
-	height: 30px;
-	white-space: pre-line;
+    display: flex;
+    align-items: center;
+    color: red;
+    text-align: left;
+    width: 40em;
+    padding-left: 14em;
+    height: 30px;
+    white-space: pre-line;
 }
 
+/* 2列レイアウトのスタイル設定 */
 .twoColumn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
 .twoColumn label,
 .twoColumn input {
-	height: 50px;
 	/* 合わせたい高さに調整 */
+    height: 50px; 
 }
 
-/* ラベルと入力欄のスタイル設定 */
+/* ラベルのスタイル設定 */
 label {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-weight: bold;
-	margin-right: 70px;
-	width: 100px;
-	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 70px;
+    width: 100px;
+    text-align: center;
 }
 
 /* ボタンのスタイル設定 */
 #loginBtn {
-	width: 200px;
-	height: 50px;
-	margin-top: 20px;
-
-	background-color: rgb(163, 179, 241);
-	color: rgb(0, 0, 0);
-	font-size: larger;
-	font-weight: bold;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    width: 200px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: rgb(163, 179, 241);
+    color: rgb(0, 0, 0);
+    font-size: larger;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 /* ボタンホバー時のスタイル設定 */
 #loginBtn:hover {
-	background-color: rgb(0, 185, 255);
-	color: white;
+    background-color: rgb(0, 185, 255);
+    color: white;
 }
 
+/* リンクのスタイル設定 */
 a {
-	margin-top: 40px;
-	text-decoration: none;
-	color: rgb(0, 128, 192);
-
-	font-size: large;
+    margin-top: 40px;
+    text-decoration: none;
+    color: rgb(0, 128, 192);
+    font-size: large;
 }

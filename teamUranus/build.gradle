@@ -1,42 +1,62 @@
+// 使用するプラグインの定義
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.2'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'java' // Javaプラグイン（Javaプロジェクトで使用）
+    id 'org.springframework.boot' version '3.2.2' // Spring Bootプラグイン
+    id 'io.spring.dependency-management' version '1.1.4' // Springの依存関係管理プラグイン
 }
 
+// プロジェクトのグループIDとバージョンの定義
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
+// Javaのソースコードの互換性を設定
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
+// コンフィギュレーションの定義
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
+// Mavenリポジトリの設定
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
+// 依存関係の定義
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'javax.validation:validation-api:2.0.1.Final'
-	implementation 'org.springframework.boot:spring-boot-starter'
+    // Spring Boot Starter Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Spring Boot Starter Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    // Spring Boot DevTools（開発時の便利なツール）
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // PostgreSQL JDBCドライバー
+    runtimeOnly 'org.postgresql:postgresql'
+    // Lombokのアノテーションプロセッサ
+    annotationProcessor 'org.projectlombok:lombok'
+    // Spring Boot Starter Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Spring Boot Starter Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Bean Validation API
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    // Spring Boot Starter
+    implementation 'org.springframework.boot:spring-boot-starter'
+    // Hibernate Validator
     implementation 'org.hibernate.validator:hibernate-validator'
+    // Spring Boot Starter Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    // Spring Boot Starter Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
+// 'test'タスクの設定
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 				.requestMatchers("/static/**", "/img/**", "/css/**").permitAll());
 		// ダイレクトアクセス処理
 		//.requestMatchers("/topMenu", "/registration").authenticated()
-
+		
 		return http.build();
 	}
 

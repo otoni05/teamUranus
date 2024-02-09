@@ -1,101 +1,101 @@
 /* 全体の高さを100%に設定 */
 html,
 body {
-	height: 100%;
-
-	background-color: rgb(200, 200, 200);
+    height: 100%;
+    background-color: rgb(200, 200, 200);
 }
 
+/* ヘッダーのスタイル設定 */
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	height: 80px;
-	background-color: gray;
-	margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: gray;
+    margin-right: 30px;
 }
 
+/* ロゴのスタイル設定 */
 .logo {
-	margin-left: 30px;
-	max-height: 100px;
-	/* ロゴの高さを調整 */
-	max-width: 100px;
-	/* ロゴの幅を調整 */
+    margin-left: 30px;
+    /* ロゴの高さを調整 */
+    max-height: 100px; 
+     /* ロゴの幅を調整 */
+    max-width: 100px; 
 }
 
+/* タイトルのスタイル設定 */
 .tytle {
-	margin-right: 100px;
+    margin-right: 100px;
 }
 
+/* トップコンテナのスタイル設定 */
 #topContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 450px;
-	height: 60%;
-	margin: auto;
-	margin-top: 100px;
-	background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 450px;
+    /* コンテナの高さを60%に設定 */
+    height: 60%; 
+    margin: auto;
+    margin-top: 100px;
+    background-color: white;
 }
+
+/* タイトルコンテナのスタイル設定 */
 .tytleContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-p{
-	margin:20px;
-	text-align: center;
-	display:flex;
-	justify-content: center;
+/* 段落のスタイル設定 */
+p {
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
+
+/* フォームのスタイル設定 */
 form {
-    width: 100%; /* フォームの横幅を100%に設定 */
+	/* フォームの横幅を100%に設定 */
+    width: 100%; 
     padding: 1em;
-  
 }
 
-.index{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	margin:30px 0 30px 0;
+/* インデックスのスタイル設定 */
+.index {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 30px 0;
 }
 
-
-.btn{
-	width: 60%;
-	justify-content: center;
-}
-
-h2{
-	transform: scaleX(0.9);	
-	font-weight: bold;
-
-}
-
+/* ボタンのスタイル設定 */
 input {
-	width: 9em;
-	height: 3em;
-	background-color: rgb(163, 179, 241);
-	color: rgb(0, 0, 0);
-	font-weight: bold;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    width: 9em;
+    height: 3em;
+    background-color: rgb(163, 179, 241);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 /* ボタンホバー時のスタイル設定 */
 input:hover {
-	background-color: rgb(0, 185, 255);
-	color: white;
+    background-color: rgb(0, 185, 255);
+    color: white;
 }
 
+/* リンクのスタイル設定 */
 a {
-	display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px;

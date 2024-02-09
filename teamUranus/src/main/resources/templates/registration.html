@@ -2,42 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>登録完了画面</title>
-	<!-- リセットCSSを読み込む処理を記述 -->
-	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-	<!-- cssファイルを読み込む処理を記述 -->
-	<link rel="stylesheet" href="/css/registration.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録完了画面</title>
+    <!-- リセットCSSを読み込む処理を記述 -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- cssファイルを読み込む処理を記述 -->
+    <link rel="stylesheet" href="/css/registration.css">
 
 </head>
 
 <body>
-	<header>
-		<img th:src="@{/img/DLlogo.png}" class="logo">
-		<h2 class="tytle">JavaTeamDevelopment</h2>
-	</header>
+    <header>
+        <!-- ロゴの表示 -->
+        <img th:src="@{/img/DLlogo.png}" class="logo">
+        <!-- タイトルの表示 -->
+        <h2 class="tytle">JavaTeamDevelopment</h2>
+    </header>
 
-	<div class="container">
-		<div id="subContainer">
-			<div class="top">
-				<h2>自己紹介の登録が完了しました！</h2>
-			</div>
+    <div class="container">
+        <div id="subContainer">
+            <div class="top">
+                <!-- タイトル -->
+                <h2>自己紹介の登録が完了しました！</h2>
+            </div>
 
-			<div id="info">
-				<p class="comment">下記内容の自己紹介の登録が完了しました！</p>
-				<p>管理番号：<span></span></p>
-				<p>名前：<span></span></p>
-				<p>フリガナ：<span></span></p>
-				<p>性別：<span></span></p>
-				<p>趣味：<span></span></p>
-				<p>一言：<span></span></p>
-				<p class="comment">自己紹介の内容を変更するには登録内容一覧画面から編集をして頂くか、管理者へお問い合わせください。</p>
-			</div>
-			<a th:href="@{/topMenu}">TOPへ戻る</a>
-		</div>
-		
-	</div>
+            <div id="info">
+                <p class="comment">下記内容の自己紹介の登録が完了しました！</p>
+                <!-- 登録内容の表示 -->
+                <p>管理番号：<span></span></p>
+                <p>名前：<span></span></p>
+                <p>フリガナ：<span></span></p>
+                <p>性別：<span></span></p>
+                <p>趣味：<span></span></p>
+                <p>一言：<span></span></p>
+                <!-- 注意事項の表示 -->
+                <p class="comment">自己紹介の内容を変更するには登録内容一覧画面から編集をして頂くか、管理者へお問い合わせください。</p>
+            </div>
+            <!-- TOPへのリンク -->
+            <a th:href="@{/topMenu}">TOPへ戻る</a>
+        </div>
+
+    </div>
 
 </html>

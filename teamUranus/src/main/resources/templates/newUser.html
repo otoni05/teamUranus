@@ -2,71 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ログイン</title>
-	<!-- リセットCSSを読み込む処理を記述 -->
-	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-	<!-- cssファイルを読み込む処理を記述 -->
-	<link rel="stylesheet" href="/css/newUser.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <!-- リセットCSSを読み込む処理を記述 -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- cssファイルを読み込む処理を記述 -->
+    <link rel="stylesheet" href="/css/newUser.css">
 
 </head>
 
 <body>
-	<header>
-		<img th:src="@{/img/DLlogo.png}" class="logo">
-		<h2 class="tytle">JavaTeamDevelopment</h2>
-	</header>
-	<!-- ログインフォーム -->
-	<div class="container">
-		<div class="top">
-			<h2>新規会員登録</h2>
-		</div>
+    <header>
+        <!-- ロゴの表示 -->
+        <img th:src="@{/img/DLlogo.png}" class="logo">
+        <!-- タイトルの表示 -->
+        <h2 class="tytle">JavaTeamDevelopment</h2>
+    </header>
+    <!-- 新規会員登録フォーム -->
+    <div class="container">
+        <div class="top">
+            <!-- タイトル -->
+            <h2>新規会員登録</h2>
+        </div>
 
-		<form method="post" th:action="@{/newUser}" th:object="${newUser}">
+        <form method="post" th:action="@{/newUser}" th:object="${newUser}">
 
-			<div class="errContainer">
-				<span th:if="${#fields.hasErrors('*{userId}')}" th:errors="*{userId}"></span>
-			</div>
-			<div class="threeColumns">
-				<label for="userId">UserID</label>
-				<div class="needColumn">
-					<p>必須</p>
-				</div>
-				<input type="text" th:field="*{userId}" class="formControl">
-			</div>
-			
+            <!-- UserIDのエラーメッセージ -->
+            <div class="errContainer">
+                <span th:if="${#fields.hasErrors('*{userId}')}" th:errors="*{userId}"></span>
+            </div>
+            <div class="threeColumns">
+                <!-- UserIDのラベル -->
+                <label for="userId">UserID</label>
+                <!-- 必須項目の表示 -->
+                <div class="needColumn">
+                    <p>必須</p>
+                </div>
+                <!-- UserIDの入力フィールド -->
+                <input type="text" th:field="*{userId}" class="formControl">
+            </div>
 
-			<div class="errContainer">
-				<span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}"></span>
-			</div>
-			<div class="threeColumns">
-				<label for="email">MailAddress</label>
-				<div class="needColumn">
-					<p>必須</p>
-				</div>
-				<input type="text" th:field="*{email}" class="formControl">
-			</div>
-			
+            <!-- Emailのエラーメッセージ -->
+            <div class="errContainer">
+                <span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}"></span>
+            </div>
+            <div class="threeColumns">
+                <!-- Emailのラベル -->
+                <label for="email">MailAddress</label>
+                <!-- 必須項目の表示 -->
+                <div class="needColumn">
+                    <p>必須</p>
+                </div>
+                <!-- Emailの入力フィールド -->
+                <input type="text" th:field="*{email}" class="formControl">
+            </div>
 
-			<div class="errContainer">
-				<!-- パスワードのバリデーションエラー -->
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <!-- パスワードのエラーメッセージ -->
+            <div class="errContainer">
+                <!-- パスワードのバリデーションエラー -->
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 
-				<!-- 他のエラーメッセージ -->
-				<span th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
-			</div>
-			<div class="threeColumns">
-				<label for="password">PassWord</label>
-				<div class="needColumn">
-					<p>必須</p>
-				</div>
-				<input type="text" th:field="*{password}" class="formControl">
-			</div>
-			<input type="submit" value="登録" id="loginBtn">
-			<a th:href="@{/login}">ログイン画面へ</a>
-		</form>
-	</div>
+                <!-- 他のエラーメッセージ -->
+                <span th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
+            </div>
+            <div class="threeColumns">
+                <!-- パスワードのラベル -->
+                <label for="password">PassWord</label>
+                <!-- 必須項目の表示 -->
+                <div class="needColumn">
+                    <p>必須</p>
+                </div>
+                <!-- パスワードの入力フィールド -->
+                <input type="text" th:field="*{password}" class="formControl">
+            </div>
+            <!-- 登録ボタン -->
+            <input type="submit" value="登録" id="loginBtn">
+            <!-- ログイン画面へのリンク -->
+            <a th:href="@{/login}">ログイン画面へ</a>
+        </form>
+    </div>
 
 </html>

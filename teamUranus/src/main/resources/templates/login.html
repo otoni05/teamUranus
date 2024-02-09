@@ -2,54 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ログイン</title>
-	<!-- リセットCSSを読み込む処理を記述 -->
-	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-	<!-- cssファイルを読み込む処理を記述 -->
-	<link rel="stylesheet" href="/css/login.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <!-- リセットCSSを読み込む処理を記述 -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- cssファイルを読み込む処理を記述 -->
+    <link rel="stylesheet" href="/css/login.css">
 
 </head>
 
 <body>
-	<header>
-		<img th:src="@{/img/DLlogo.png}" class="logo">
-		<h2 class="tytle">JavaTeamDevelopment</h2>
-	</header>
-	
-	<div class="container">
-		<div class="top">
-			<h2>ログイン</h2>
-		</div>
+    <header>
+        <!-- ロゴの表示 -->
+        <img th:src="@{/img/DLlogo.png}" class="logo">
+        <!-- タイトルの表示 -->
+        <h2 class="tytle">JavaTeamDevelopment</h2>
+    </header>
 
-		<form method="POST" action="/login" th:object="${loginForm}">
-			<!-- CSRFトークンの追加 -->
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			
-			<div class="errContainer">
-				<span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
-			</div>
+    <div class="container">
+        <div class="top">
+            <!-- ログインタイトル -->
+            <h2>ログイン</h2>
+        </div>
 
-			<div class="twoColumn">
-				<label for="loginId">UserID</label>
-				<input type="text" th:field="*{loginId}" class="formControl">
-			</div>
+        <form method="POST" action="/login" th:object="${loginForm}">
+            <!-- CSRFトークンの追加 -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-			<div class="errContainer">
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-			</div>
+            <!-- ログインIDのエラーメッセージ -->
+            <div class="errContainer">
+                <span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
+            </div>
 
-			<div class="twoColumn">
-				<label for="password">PassWord</label>
-				<input type="password" th:field="*{password}" class="formControl">
-			</div>
+            <div class="twoColumn">
+                <!-- ログインIDのラベル -->
+                <label for="loginId">UserID</label>
+                <!-- ログインIDの入力フィールド -->
+                <input type="text" th:field="*{loginId}" class="formControl">
+            </div>
 
-			<input type="submit" value="ログイン" id="loginBtn">
-			<a th:href="@{/newUser}">新規会員登録はこちら</a>
-		</form>
+            <!-- パスワードのエラーメッセージ -->
+            <div class="errContainer">
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
 
-	</div>
+            <div class="twoColumn">
+                <!-- パスワードのラベル -->
+                <label for="password">PassWord</label>
+                <!-- パスワードの入力フィールド -->
+                <input type="password" th:field="*{password}" class="formControl">
+            </div>
+
+            <!-- ログインボタン -->
+            <input type="submit" value="ログイン" id="loginBtn">
+            <!-- 新規会員登録リンク -->
+            <a th:href="@{/newUser}">新規会員登録はこちら</a>
+        </form>
+
+    </div>
 
 </html>

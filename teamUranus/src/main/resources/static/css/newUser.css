@@ -5,43 +5,54 @@ body {
     background-color: rgb(200, 200, 200);
 }
 
+/* ヘッダーのスタイル設定 */
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	height: 80px;
-	background-color: gray;
-	margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: gray;
+    margin-right: 30px;
 }
 
+/* ロゴのスタイル設定 */
 .logo {
-	margin-left: 30px;
-    max-height: 100px; /* ロゴの高さを調整 */
-    max-width: 100px;  /* ロゴの幅を調整 */
+    margin-left: 30px;
+    /* ロゴの高さを調整 */
+    max-height: 100px; 
+     /* ロゴの幅を調整 */
+    max-width: 100px; 
 }
+
+/* タイトルのスタイル設定 */
 .tytle {
-	margin-right: 100px;
+    margin-right: 100px;
 }
 
+/* コンテナのスタイル設定 */
 .container {	
-    height: 100vh;
+	/* ウィンドウの高さに合わせる */
+    height: 100vh; 
 }
 
+/* トップとフォームのスタイル設定 */
 .top,
 form {
-	display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
-.top{
-	height: 12%;
-	justify-content: end;
-	margin-bottom: 2%;
+/* トップのスタイル設定 */
+.top {
+	/* コンテナの12%を占める */
+    height: 12%; 
+    justify-content: end;
+    margin-bottom: 2%;
 }
 
+/* 見出しのスタイル設定 */
 h1 {
     font-size: 25px;
 }
@@ -51,56 +62,58 @@ h1 {
     outline: 1px solid rgb(0, 0, 0);
     height: 50px;
     justify-content: center;
-    width: 400px; /* 最大幅を設定 */
+     /* 最大幅を設定 */
+    width: 400px;
     margin-left: 20px;
     padding-left: 10px; 
     background-color: white;
 }
 
-.formControl:focus{
-	outline: 2px solid #000;
+.formControl:focus {
+    outline: 2px solid #000;
 }
 
-
+/* 3列レイアウトのスタイル設定 */
 .threeColumns {
-     display: flex;
+    display: flex;
     align-items: center;
 }
 
+/* エラーコンテナのスタイル設定 */
 .errContainer {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     color: red;
     text-align: left;
     width: 25em;
     margin-left: 12em;
     height: 30px;
-    
 }
 
-/* ラベルと入力欄のスタイル設定 */
+/* ラベルのスタイル設定 */
 label {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
-    width: 100px; 
+    width: 100px;
     text-align: center;
 }
 
-.needColumn{
-	background-color:red;
-	color: white;
-	border-radius: 5px;
-	width: 50px;
-	height: 30px;
-	font-size: small;
-	font-weight: bold;
-	text-align: center;
-	padding-top: 5px;
-	margin-left:20px;
-/*	transform: scaleX(0.9);*/
+/* 必須項目カラムのスタイル設定 */
+.needColumn {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+    margin-left: 20px;
 }
+
 /* ボタンのスタイル設定 */
 #loginBtn {
     width: 210px;
@@ -109,11 +122,7 @@ label {
     color: rgb(0, 0, 0);
     font-size: larger;
     font-weight: bold;
-    
     background-color: rgb(163, 179, 241);
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
@@ -123,11 +132,10 @@ label {
     color: white;
 }
 
+/* リンクのスタイル設定 */
 a {
-	margin-top: 40px;
-	text-decoration: none;
-	color: rgb(0, 128, 192);
-
-	font-size:large;
+    margin-top: 40px;
+    text-decoration: none;
+    color: rgb(0, 128, 192);
+    font-size: large;
 }
-

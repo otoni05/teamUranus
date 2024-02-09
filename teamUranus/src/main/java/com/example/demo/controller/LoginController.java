@@ -13,6 +13,9 @@ import com.example.demo.model.UserForm;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
+/**
+ * ログイン関連の操作を管理するためのControllerクラスです。
+ */
 @Controller
 public class LoginController {
 
@@ -22,19 +25,31 @@ public class LoginController {
 	@Autowired
 	private UserRepository userRepository;
 
+	/**
+	 * ログインフォームを表示します。
+	 *
+	 * @param model ビューで使用されるモデル
+	 * @return ログインフォームのビュー名
+	 */
 	@GetMapping("/login")
 	public String showLoginForm(Model model) {
 		// ログインフォームをモデルに追加
-
 		model.addAttribute("loginForm", new LoginForm());
 		// ログインフォームのビューを表示
 		return "login";
 	}
 
+	/**
+	 * ログインフォームの入力を処理します。
+	 *
+	 * @param loginForm ログインフォームに入力されたデータ
+	 * @param result    バリデーションエラーのためのバインディング結果
+	 * @param model     ビューで使用されるモデル
+	 * @return ログインに成功した場合はトップメニューのビュー名、それ以外はログインフォームのビュー名
+	 */
 	@PostMapping("/login")
 	public String processLoginForm(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult result,
 			Model model) {
-		
 		// ユーザーログインのバリデーションを行うサービスメソッドを呼び出し
 		userService.validateLoginUser(loginForm, result);
 
@@ -49,7 +64,7 @@ public class LoginController {
 		// ユーザーが存在し、パスワードが正しい場合はトップメニューのビューを表示
 		if (existingUser != null && userService.isPasswordValid(loginForm.getPassword(), existingUser.getPassword())) {
 			// トップメニューのビューを表示
-			return "registration";
+			return "topMenu";
 		}
 		
 		// ログインに失敗した場合はログインフォームのビューを表示
