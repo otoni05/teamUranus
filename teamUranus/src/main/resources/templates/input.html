@@ -19,66 +19,6 @@
         </nav>
     </header>
     
-    <script>
-		function validateForm() {
-    // 全てのエラーメッセージをリセット
-    resetErrorMessages();
-
-    // バリデーションを行う
-    let valid = true;
-
-    // 名前のバリデーション
-    const nameInput = document.getElementById('inputname');
-    const nameError = document.getElementById('name-error');
-    if (nameInput.value === '') {
-        nameError.innerText = '名前は必須項目です。';
-        valid = false;
-    } else if (nameInput.value.length > 10) {
-        nameError.innerText = '名前は10文字以内で入力してください。';
-        valid = false;
-    }
-
-    // フリガナのバリデーション
-    const phoneticInput = document.getElementById('inputphonetic');
-    const phoneticError = document.getElementById('phonetic-error');
-    if (phoneticInput.value === '') {
-        phoneticError.innerText = 'フリガナは必須項目です。';
-        valid = false;
-    } else if (phoneticInput.value.length > 20) {
-        phoneticError.innerText = 'フリガナは20文字以内で入力してください。';
-        valid = false;
-    }
-
-
-    // 趣味のバリデーション（一つ以上選択が必要）
-    const hobbyCheckboxes = document.querySelectorAll('input[name="hobby"]:checked');
-    const hobbyError = document.getElementById('hobby-error');
-    if (hobbyCheckboxes.length === 0) {
-        hobbyError.innerText = '趣味は必須項目です。1つ以上選んでください。';
-        valid = false;
-    }
-
-    // 一言のバリデーション
-    const hitokotoTextarea = document.querySelector('textarea[name="hitokoto"]');
-    const hitokotoError = document.getElementById('hitokoto-error');
-    if (hitokotoTextarea.value === '') {
-        hitokotoError.innerText = '一言は必須項目です。';
-        valid = false;
-    }
-
-    return valid;
-}
-
-// 全てのエラーメッセージをリセットする関数
-function resetErrorMessages() {
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(function (errorMessage) {
-        errorMessage.innerText = '';
-    });
-}
-
-	</script>
-    
     <main>
        <h1 id="formtitle">
             自己紹介の内容を記入してください
@@ -124,13 +64,13 @@ function resetErrorMessages() {
 						<p class="required">必須</p>
                         <!-- 各チェックボックスに  を追加 -->
                         <div class="checkvalue_columns">
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="映画" th:checked="${userForm.hobby.contains('映画')}">映画</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="マンガ" th:checked="${userForm.hobby.contains('マンガ')}">マンガ</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="スポーツ" th:checked="${userForm.hobby.contains('スポーツ')}">スポーツ</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="グルメ" th:checked="${userForm.hobby.contains('グルメ')}">グルメ</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="ゲーム" th:checked="${userForm.hobby.contains('ゲーム')}">ゲーム</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="アニメ" th:checked="${userForm.hobby.contains('アニメ')}">アニメ</label>
-    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="その他" th:checked="${userForm.hobby.contains('その他')}">その他</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="映画" >映画</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="マンガ">マンガ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="スポーツ">スポーツ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="グルメ">グルメ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="ゲーム">ゲーム</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="アニメ">アニメ</label>
+    <label class="checkvalue_hobby"><input class="checkradio" type="checkbox" name="hobby" value="その他">その他</label>
 						</div>
                     </label>
                 </li>
