@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>詳細画面</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+	<link th:href="@{/css/detailDisp.css}" rel="stylesheet" type="text/css">
+	<script th:src="@{/js/detailDisp.js}"></script>
+</head>
+
+<body>
+	<header>
+		<img class="headerLogo" th:src="@{/img/DLlogo.png}" alt="ドライブラインロゴ">
+		<p class="headerTitle">JavaTeamDevelopment</p>
+
+	</header>
+	<div class="contentsWrapper">
+		<div class="titleWrapper">
+			<p class="pageTitle">自己紹介</p>
+		</div>
+		<table class="introduction_table">
+			<tr>
+				<td class="item">管理番号</td>
+				<td class="introduction id" th:text="${userIntroductions.introductionId}"></td>
+			</tr>
+			<tr>
+				<td class="item">名前</td>
+				<td class="introduction name" th:text="${userIntroductions.name}"></td>
+			</tr>
+			<tr>
+				<td class="item">フリガナ</td>
+				<td class="introduction kana" th:text="${userIntroductions.kana}"></td>
+			</tr>
+			<tr>
+				<td class="item">性別</td>
+				<td class="introduction gender" th:text="${userIntroductions.gender}">非公開</td>
+			</tr>
+			<tr>
+				<td class="item">趣味</td>
+				<td class="introduction hobby" th:text="${userIntroductions.hobby}"></td>
+			</tr>
+			<tr>
+				<td class="item">一言</td>
+				<td class="introduction word" th:text="${userIntroductions.word}"></td>
+			</tr>
+		</table>
+		<div class="info buttonWrapper">
+			<button class="return" onclick="location.href='/listDisp'">戻る</button>
+			<button class="edit">編集</button>
+			<button class="delete" id="modelOpenBtn">削除</button>
+		</div>
+
+	</div>
+	<div class="modal" id="deleteModal">
+
+	</div>
+	<!-- 削除ボタン押下時に表示するウインドウ -->
+	<div id="miniWindow">
+		<div class="msgWrapper">
+		<p class="deleteMsg">ID:<span th:text="${userIntroductions.introductionId}"></span>のデータを削除してもよろしいですか？</p>
+		</div>
+		<div class="deleteButtonWrapper">
+			<button class="deleteButton" id="cancel">Cancel</button>
+			<!-- okを押したらidを持って削除用urlに飛んで削除処理をする -->
+			<form class="deleteForm" th:action="@{/detailDisp/{id}/delete(id=${userIntroductions.introductionId})}">
+			<button class="deleteButton">OK</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

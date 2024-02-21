@@ -1,0 +1,64 @@
+p {
+    text-align: center;
+    margin:50px 0 50px 0;
+}
+body {
+    background-color:whitesmoke;
+}
+/***** ヘッダー部分 *****/
+header {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background-color: darkgrey;
+    border-bottom: 2px solid gray;
+}
+
+.headerLogo {
+	height:12vh;
+}
+
+.headerTitle {
+    font-weight:bold;
+    font-size: large;
+}
+/* タイトル */
+.pageTitle {
+	margin-top:10vh;
+	font-weight: bold;
+    font-size: 25px;
+}
+/***** リスト部分 *****/
+.contentsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+table {
+    width:50vw;
+    border-collapse: collapse;
+    background-color: white;
+}
+th {
+    background-color: lightgray;
+    height:50px;
+}
+th,td {
+    border:solid 2px;
+    text-align: center;
+}
+.left {
+	width:45%;
+}
+.right {
+	width:55%;
+}
+
+.userId {
+	text-decoration: none;
+	color:teal;
+}

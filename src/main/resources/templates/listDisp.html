@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>一覧画面</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link th:href="@{/css/listDisp.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <img class="headerLogo" th:src="@{/img/DLlogo.png}" alt="ドライブラインロゴ">
+        <p class="headerTitle">JavaTeamDevelopment</p>
+
+    </header>
+    <div class="contentsWrapper">
+    <div class="titleWrapper">
+        <p class="pageTitle">自己紹介登録者一覧</p>
+    </div>
+    <div class="listWrapper">
+        <table>
+            <tr>
+                <th class="left">ID</th>
+                <th class="right">名前</th>
+            </tr>
+            <!-- 登録者の数だけ繰り返す -->
+            <tr th:each="introduction:${introductions}">
+				<!-- IDをクリックで詳細画面に飛ぶ -->
+                <td><a class="left userId" th:href="@{/detailDisp/{id}(id=${introduction.userId})}" th:text="${introduction.userId}"></a></td>
+                <td class="right" th:text="${introduction.name}"></td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+
+</html>

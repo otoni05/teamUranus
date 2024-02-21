@@ -1,0 +1,145 @@
+p {
+	text-align: center;
+}
+/* 背景色 */
+body {
+	background-color: whitesmoke;
+}
+
+/* ヘッダー */
+header {
+	height: 10vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 5%;
+	background-color: darkgrey;
+	border-bottom: 2px solid gray;
+}
+/* ヘッダーロゴ */
+.headerLogo {
+	height: 12vh;
+}
+/* ヘッダータイトル */
+.headerTitle {
+	font-weight: bold;
+	font-size: large;
+}
+/* 詳細情報の全体 */
+.contentsWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.pageTitle {
+	margin: 10vh 0 5vh 0;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+/***** 表部分 *****/
+table {
+	width: 30vw;
+	border-collapse: collapse;
+	background-color: white;
+	;
+}
+
+td {
+	height: 50px;
+	border: solid 1px;
+
+}
+
+.item {
+	width: 15%;
+	text-align: center;
+}
+
+.introduction {
+	padding: 5px;
+}
+
+.word {
+	height: 150px;
+}
+
+.buttonWrapper {
+	width: 30vw;
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+}
+
+button {
+	height: 50px;
+	width: 100px;
+	font-weight: bold;
+}
+
+.return {
+	background-color: lightsteelblue;
+}
+
+.edit {
+	background-color: lightsteelblue;
+}
+
+.delete {
+	background-color: lightpink;
+}
+
+/***** 削除ボタン押下時に表示されるウインドウ *****/
+#deleteModal {
+	display: none;
+	z-index: 9998;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:100vh;
+	width:100vw;
+	background-color: black;
+	opacity: 0.7;
+}
+
+#miniWindow {
+	display: none;
+	height: 20vh;
+	width: 35vw;
+	z-index: 9999;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid black;
+	background-color: whitesmoke;
+	opacity:1;
+	text-align: center;
+	}
+
+.msgWrapper{
+	height:50%;
+	background-color: whitesmoke;
+}
+.deleteMsg {
+	margin-top:40px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.deleteButtonWrapper {
+	height:50%;
+	display: flex;
+	justify-content: right;
+}
+
+.deleteButton {
+	margin-right:50px;
+	height: 40px;
+	width:120px;
+	font-size:large;
+	border: 1px solid black;
+	background-color: lightsteelblue;
+}
